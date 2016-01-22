@@ -1,0 +1,29 @@
+{
+  "name": "kanji-frequency",
+  "description": "Kanji usage frequency data and visualizations",
+  "author": "Dmitry Shpika <***REMOVED***>",
+  "version": "0.0.0",
+  "private": true,
+  "license": "(Apache-2.0+ OR CC-BY-4.0+ OR EPL-1.0+ OR LGPL-3.0+ OR MIT)",
+  "keywords": [
+    "kanji",
+    "frequency",
+    "japanese",
+    "charts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scriptin/kanji-frequency.git"
+  },
+  "scripts": {
+    "start": "brunch watch --server"
+  },
+  "dependencies": {
+    "auto-reload-brunch": "1.8.1",
+    "clean-css-brunch": "1.8.0",
+    "css-brunch": "1.7.0",
+    "javascript-brunch": "1.8.0",
+    "less-brunch": "1.8.1",
+    "uglify-js-brunch": "1.7.8"
+  }
+}

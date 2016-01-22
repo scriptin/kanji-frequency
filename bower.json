@@ -1,0 +1,38 @@
+{
+  "name": "kanji-frequency",
+  "authors": [
+    "Dmitry Shpika <***REMOVED***>"
+  ],
+  "description": "Kanji usage frequency data and visualizations",
+  "version": "0.0.0",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "kanji",
+    "frequency",
+    "japanese",
+    "charts"
+  ],
+  "license": [
+    "Apache-2.0",
+    "CC-BY-4.0",
+    "EPL-1.0",
+    "LGPL-3.0",
+    "MIT"
+  ],
+  "homepage": "https://github.com/scriptin/kanji-frequency",
+  "private": true,
+  "dependencies": {
+    "d3": "3.5.13",
+    "bluebird": "3.1.1",
+    "bootstrap": "3.3.6",
+    "lodash": "4.0.0"
+  },
+  "overrides": {
+    "lodash": {
+      "main": [
+        "dist/lodash.js"
+      ]
+    }
+  }
+}
