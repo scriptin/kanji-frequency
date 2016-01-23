@@ -1,6 +1,8 @@
 @color-primary: steelblue;
 @color-secondary: crimson;
 @color-axis: black;
+@color-chart-border: lightgrey;
+@color-chart-bg: lighten(@color-chart-border, 15%);
 
 @stroke-width-axis: 1;
 @stroke-width-data: 2;
@@ -28,5 +30,26 @@ path {
   }
   &.x path {
     display: none;
+  }
+}
+
+.chart-wrapper {
+  @padding: 10px;
+  border: 1px solid @color-chart-border;
+  background-color: @color-chart-bg;
+  margin: 0 0 1em 0;
+  padding: @padding;
+  box-shadow: 1px 1px 1px @color-chart-border;
+
+  .chart-title {
+    text-align: center;
+    border-bottom: 1px dashed @color-chart-border;
+    margin: 0;
+    padding: 0 0 @padding 0;
+  }
+
+  .chart {
+    margin: 0;
+    padding: 0;
   }
 }

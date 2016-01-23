@@ -30,19 +30,28 @@ Promise.all(_.map(_.toPairs(kanjiData), function (data) {
     $('#general-info .templates').append(infoBlock);
   });
 
-  // Zipf's law
+  // Frequency and coverage
   _.forEach(kanjiData, function (data, key) {
-    var chart = $('<div/>', {'class': 'col-xs-12'});
-    chart.append($('<p/>').text(data.name));
-    $('#zipf-law .templates').append(chart);
-    freqCoverChart(chart, key, data);
+    var cw = chartWrapper(data.name, 'col-xs-12');
+    $('#zipf-law .templates').append(cw);
+    freqCoverChart(cw.find('.chart'), key, data);
   });
 });
+
+function chartWrapper(title, classes) {
+  var chartCell = $('<div/>', {'class': classes});
+  var chartWrapper = $('<div/>', {'class': 'chart-wrapper'});
+  chartCell.append(chartWrapper);
+  chartWrapper.append($('<div/>', {'class': 'chart-title'}).text(title));
+  var chart =  $('<div/>', {'class': 'chart'});
+  chartWrapper.append(chart);
+  return chartCell;
+}
 
 function freqCoverChart(el, key, data) {
   var margin = { top: 20, right: 40, bottom: 30, left: 40 };
 
-  var width = el.width() - margin.left - margin.right;
+  var width = el.innerWidth() - margin.left - margin.right;
   var height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
