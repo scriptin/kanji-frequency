@@ -26,7 +26,8 @@
     "d3": "3.5.13",
     "bluebird": "3.1.1",
     "bootstrap": "3.3.6",
-    "lodash": "4.0.0"
+    "lodash": "4.0.0",
+    "jquery": "2.2.0"
   },
   "overrides": {
     "lodash": {

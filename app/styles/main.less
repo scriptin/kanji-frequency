@@ -1,0 +1,32 @@
+@color-primary: steelblue;
+@color-secondary: crimson;
+@color-axis: black;
+
+@stroke-width-axis: 1;
+@stroke-width-data: 2;
+
+path {
+  stroke: @color-primary;
+  stroke-width: @stroke-width-data;
+  fill: none;
+  &.secondary {
+    stroke: @color-secondary;
+  }
+}
+
+.bar {
+  fill: @color-primary;
+}
+
+.axis {
+  font: 10px sans-serif;
+  path, line {
+    fill: none;
+    stroke: @color-axis;
+    stroke-width: @stroke-width-axis;
+    shape-rendering: crispEdges;
+  }
+  &.x path {
+    display: none;
+  }
+}
