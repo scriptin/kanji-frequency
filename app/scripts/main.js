@@ -51,7 +51,7 @@ function chartWrapper(title, classes) {
 function freqCoverChart(el, key, data) {
   var margin = { top: 20, right: 40, bottom: 30, left: 40 };
 
-  var width = el.innerWidth() - margin.left - margin.right;
+  var width = Math.max(el.innerWidth(), 1100) - margin.left - margin.right;
   var height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
