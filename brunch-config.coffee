@@ -18,3 +18,7 @@ exports.config =
       joinTo:
         'styles/vendor.css': /^bower_components\//
         'styles/app.css': /^app\//
+  overrides:
+    production:
+      paths:
+        public: 'gh-pages'
