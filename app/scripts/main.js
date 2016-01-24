@@ -30,6 +30,53 @@ Promise.all(_.map(_.toPairs(kanjiData), function (data) {
     $('#general-info .templates').append(infoBlock);
   });
 
+  function isInt(val) {
+    return (val == parseInt(val, 10));
+  }
+
+  function renderPercent(v) {
+    var r = v * 100;
+    return (isInt(r) ? r : r.toFixed(6)) + '%';
+  }
+
+  // Table
+  var select = $('<select/>', {'class': 'form-control input-sm'});
+
+  _(kanjiData).keys().forEach(function (key, i) {
+    var option = $('<option/>').val(key).text(kanjiData[key].name);
+    select.append(option);
+    if (i == 0) {
+      option.attr('selected', true);
+    }
+  });
+
+  var table = $('#table').DataTable({
+    dom: '<"#table-toolbar">fti',
+    data: kanjiData[select.val()].table.map(function (row, i) { return [i].concat(row); }),
+    columns: [
+      {title: '#'},
+      {title: 'Kanji'},
+      {title: 'Count', searchable: false },
+      {title: 'Percent', render: renderPercent, type: 'num-fmt', searchable: false }
+    ],
+    deferRender: true,
+    scroller: true,
+    scrollY: 300
+  });
+
+  $('#table-toolbar').append(select);
+
+  select.change(function (event) {
+    event.preventDefault();
+    table.clear();
+    table.rows.add(
+      kanjiData[$(this).val()].table.map(function (row, i) {
+        return [i].concat(row);
+      })
+    );
+    table.draw();
+  });
+
   // Frequency and coverage
   _.forEach(kanjiData, function (data, key) {
     var cw = chartWrapper(data.name, 'col-xs-12');

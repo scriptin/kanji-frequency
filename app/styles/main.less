@@ -1,8 +1,8 @@
 @color-primary: steelblue;
 @color-secondary: crimson;
 @color-axis: black;
-@color-chart-border: lightgrey;
-@color-chart-bg: lighten(@color-chart-border, 15%);
+@color-border: lightgrey;
+@color-bg: lighten(@color-border, 15%);
 
 @stroke-width-axis: 1;
 @stroke-width-data: 2;
@@ -33,19 +33,38 @@ path {
   }
 }
 
-.chart-wrapper {
-  @padding: 10px;
-  border: 1px solid @color-chart-border;
-  background-color: @color-chart-bg;
+@wrapper-padding: 10px;
+
+.wrapper(@padding) {
+  border: 1px solid @color-border;
+  background-color: @color-bg;
   margin: 0 0 1em 0;
   padding: @padding;
-  box-shadow: 1px 1px 1px @color-chart-border;
+  box-shadow: 1px 1px 1px @color-border;
+}
+
+.table-wrapper {
+  .wrapper(@wrapper-padding);
+}
+
+// hack
+div.DTS div.dataTables_scrollBody {
+  background: @color-bg;
+}
+
+#table-toolbar {
+  float: left;
+  font-weight: bold;
+}
+
+.chart-wrapper {
+  .wrapper(@wrapper-padding);
 
   .chart-title {
     text-align: center;
-    border-bottom: 1px dashed @color-chart-border;
+    border-bottom: 1px dashed @color-border;
     margin: 0;
-    padding: 0 0 @padding 0;
+    padding: 0 0 @wrapper-padding 0;
   }
 
   .chart {
