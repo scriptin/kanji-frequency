@@ -7,6 +7,25 @@
 @stroke-width-axis: 1;
 @stroke-width-data: 2;
 
+body {
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.jumbotron {
+  color: darken(@color-primary, 5%);
+  background-color: @color-primary;
+  background-image: linear-gradient(
+    to top right,
+    @color-primary, lighten(@color-primary, 30%)
+  );
+  h1 {
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: -1px -1px 1px lighten(@color-primary, 30%);
+    word-spacing: .1em;
+  }
+}
+
 path {
   stroke: @color-primary;
   stroke-width: @stroke-width-data;
