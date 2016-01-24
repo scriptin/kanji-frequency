@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kanji usage frequency</title>
+  <link rel="stylesheet" href="styles/vendor.css">
+  <link rel="stylesheet" href="styles/app.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700,500,400italic,700italic,500italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class="jumbotron">
+    <header class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-uppercase">Kanji usage frequency</h1>
+          <p>
+            <a class="btn btn-primary" href="https://github.com/scriptin/kanji-frequency" role="button">
+              <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+              GitHub repository
+            </a>
+          </p>
+        </div>
+      </div>
+    </header>
+  </div>
+  <section id="general-info" class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Data sources</h2>
+      </div>
+    </div>
+    <div class="row templates"></div>
+  </section>
+  <section id="tablular-data" class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Data</h2>
+        <div class="table-wrapper">
+          <table id="table" class="table table-condensed display" width="100%"></table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="zipf-law" class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Frequency and coverage</h2>
+        <p>
+          Charts below list 100 most frequently used kanji from each data source.
+          Related reading:
+          <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf's law</a>
+        </p>
+      </div>
+    </div>
+    <div class="row templates"></div>
+  </section>
+  <footer class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>&copy; 2016 <a href="http://scriptin.github.io/">Dmitry Shpika</a></p>
+        <p>
+          This work is licensed under a
+          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International License
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="scripts/vendor.js" charset="utf-8"></script>
+  <script src="scripts/app.js" charset="utf-8"></script>
+</body>
+</html>
