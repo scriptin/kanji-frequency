@@ -2,7 +2,7 @@ var generalInfo = _.template(
   '<dl>' +
     '<dt><%- name %></dt>' +
       '<dd>' +
-      '<%- description %>' +
+      '<%= description %>' +
       '<ul class="list-unstyled">' +
         '<li>kanji total: <code><%- kanjiTotalCount %></code> ' +
         '&asymp; <% print((kanjiTotalCount / 1000000).toFixed(1) + "M") %></li>' +

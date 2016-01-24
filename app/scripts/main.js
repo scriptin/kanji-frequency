@@ -1,8 +1,8 @@
 var kanjiData = {
-  aozora:    { fileName: 'aozora.json',    description: 'Books from Aozora Bunko' },
+  aozora:    { fileName: 'aozora.json',    description: 'Books from <a href="http://www.aozora.gr.jp/">Aozora Bunko</a>' },
   news:      { fileName: 'news.json',      description: 'Online news articles' },
-  twitter:   { fileName: 'twitter.json',   description: 'Twitter messages' },
-  wikipedia: { fileName: 'wikipedia.json', description: 'Wikipedia articles and pages' }
+  twitter:   { fileName: 'twitter.json',   description: 'Twitter messages collected by a <a href="https://github.com/scriptin/twitter-kanji-frequency">bot</a>' },
+  wikipedia: { fileName: 'wikipedia.json', description: 'Wikipedia articles and pages from <a href="https://dumps.wikimedia.org/jawiki/">dumps<a/>' }
 };
 
 var getJson = Promise.promisify(d3.json);
