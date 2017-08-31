@@ -1,7 +1,7 @@
 {
   "name": "kanji-frequency",
   "authors": [
-    "Dmitry Shpika <***REMOVED***>"
+    "Dmitry Shpika"
   ],
   "description": "Kanji usage frequency data and visualizations",
   "version": "0.0.0",
