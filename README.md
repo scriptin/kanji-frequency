@@ -23,6 +23,7 @@ Each file contain an array of arrays (rows). Each row contains three fields:
 
 - Sources: [Aozora Bunko][aozora]
 - Result: [aozora.json](data/aozora.json)
+- Total # of scanned texts: 12905
 - Total # of kanji collected: ~51.5M
 - Date collected: May 2015
 - Processing method: Pages were scanned as plain text, ignoring HTML structure, since they contain very little extra content.
@@ -36,13 +37,18 @@ The explanation is simple: when a kanji outside the JIS X 0208 set appears in a 
 
 ## News
 
-- Sources (may be outdated):
+- Sources:
   - http://www.asahi.com/
   - http://mainichi.jp/
   - http://www.saga-s.co.jp/
   - http://www.yomiuri.co.jp/
 - Result: [news.json](data/news.json)
 - Total # of kanji collected: ~10.3M
+- Total # of scanned texts:
+  - asahi - 19392
+  - mainichi - 6449
+  - saga-s - 61671
+  - yomiuri - 1978
 - Date collected: June 2015
 - Processing method: Samples include articles published between June 2014 and June 2015, more samples from 2015. Only article titles, subtitles, main text body and image captions were scanned. Everything else was ignored: menus, publication dates, comments, ads, links to related articles, etc. Weather forecasts and area-specific news were not included.
 
@@ -50,6 +56,7 @@ The explanation is simple: when a kanji outside the JIS X 0208 set appears in a 
 
 - Sources: [Twitter](https://twitter.com/) via [Streaming API][twitter-stream]
 - Result: [twitter.json](data/twitter.json)
+- Total # of scanned texts: unknown
 - Total # of kanji collected: ~10.0M
 - Date collected: June 2015
 - Processing method: Messages were collected within about 1 week from [Twitter's Streaming API v1][twitter-stream] using a [bot][twitter-bot]. Only message text bodies were scanned, authors' names and other data ignored. You can find specific details in the bot's source code, at commit [e82cf7c
@@ -72,8 +79,9 @@ Also, the "笑" character is #1 simply bause it is used as a generic "smiley fac
 
 - Sources: [Japanese Wikipedia](https://ja.wikipedia.org/) via [Wikipedia dump][wiki-dumps] (see [`jawiki` bot][jawiki])
 - Result: [wikipedia.json](data/wikipedia.json)
+- Total # of scanned texts: unknown
 - Total # of kanji collected: ~784.6M
-- Date collected: May 2015
+- Date collected: May 2015 (dump date is `2015-05-12`)
 - Processing method: Dump included only current versions of pages and articles, without previous revisions or any other history of editing. Dump was scanned as plain text, ignoring XML and wiki markup structure.
 
 ### Known issues
