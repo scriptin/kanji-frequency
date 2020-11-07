@@ -2,12 +2,12 @@
 
 Statistical data of kanji usage frequencies was collected by processing textual data from various sources. You can find these files in the [`data`](data) directory:
 
-| File                                  | # of kanji | Description                                               | Date      |
-| ------------------------------------- | ---------: | --------------------------------------------------------- | --------- |
-| [aozora.json](data/aozora.json)       |     ~51.5M | Fiction and non-fiction books from [Aozora Bunko][aozora] | May 2015  |
-| [news.json](data/news.json)           |     ~10.3M | Online news articles from various sources                 | June 2015 |
-| [twitter.json](data/twitter.json)     |     ~10.0M | Twitter messages collected by a [bot][twitter-bot]        | June 2015 |
-| [wikipedia.json](data/wikipedia.json) |    ~784.6M | [Wikipedia dump][wiki-dumps] (see [`jawiki` bot][jawiki]) | May 2015  |
+| File                                  | Total # of kanji | Description                                               | Date      |
+| ------------------------------------- | ---------------: | --------------------------------------------------------- | --------- |
+| [aozora.json](data/aozora.json)       |           ~51.5M | Fiction and non-fiction books from [Aozora Bunko][aozora] | May 2015  |
+| [news.json](data/news.json)           |           ~10.3M | Online news articles from various sources                 | June 2015 |
+| [twitter.json](data/twitter.json)     |           ~10.0M | Twitter messages collected by a [bot][twitter-bot]        | June 2015 |
+| [wikipedia.json](data/wikipedia.json) |          ~784.6M | [Wikipedia dump][wiki-dumps] (see [`jawiki` bot][jawiki]) | May 2015  |
 
 Notes:
 
