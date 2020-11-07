@@ -88,6 +88,11 @@ Also, the "笑" character is #1 simply bause it is used as a generic "smiley fac
 
 Since XML structure and wiki markup was ignored, thus this dataset is *potentially* noisy. This needs further investigation. Proper parsing was not implemented simply because it is too difficult (need to parse both XML and wiki markup).
 
+## Alternative datasets
+
+- http://vtrm.net/japanese/kanji-frequency/en - Aozora Bunko, with a counting method which counts each kanji only once per text
+- https://foosoft.net/posts/kanji-frequency/ - Kanji frequency in Wikipedia and novels
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
