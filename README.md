@@ -48,7 +48,7 @@ The explanation is simple: when a kanji outside the JIS X 0208 set appears in a 
 
 ## Twitter
 
-- Sources: [Twitter][https://twitter.com/] via [Streaming API][twitter-stream]
+- Sources: [Twitter](https://twitter.com/) via [Streaming API][twitter-stream]
 - Result: [twitter.json](data/twitter.json)
 - Total # of kanji collected: ~10.0M
 - Date collected: June 2015
