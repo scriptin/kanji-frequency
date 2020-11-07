@@ -82,13 +82,7 @@ Since XML structure and wiki markup was ignored, thus this dataset is *potential
 
 ## License
 
-This is a multi-license project. Choose any license from this list:
-
-- [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0) or any later version
-- [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/) or any later version
-- [EPL-1.0](https://www.eclipse.org/legal/epl-v10.html) or any later version
-- [LGPL-3.0](http://www.gnu.org/licenses/lgpl-3.0.html) or any later version
-- [MIT](http://opensource.org/licenses/MIT)
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
 [aozora]: http://www.aozora.gr.jp/
 [jawiki]: https://dumps.wikimedia.org/jawiki/
