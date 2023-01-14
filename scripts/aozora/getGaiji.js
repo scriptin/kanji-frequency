@@ -8,7 +8,7 @@ const {
   GAIJI_LIST_FILE,
 } = require('./common');
 
-const GAIJI_IMG_REGEX = /<img.*?gaiji.*?\/?>/i;
+const GAIJI_IMG_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/i;
 const SRC_ATTR_REGEX = /src="(.*?)"/i;
 const ALT_ATTR_REGEX = /alt="(.*?)"/i;
 
