@@ -3,3 +3,6 @@ bower_components/
 public/
 
 .idea/
+
+scripts/aozora/pages/*
+!scripts/aozora/pages/.gitkeep

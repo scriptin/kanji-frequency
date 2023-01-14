@@ -1,0 +1,181 @@
+const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { join } = require('path');
+const puppeteer = require('puppeteer');
+
+const BASE_URL = 'https://www.aozora.gr.jp/';
+const PAGES_FILE = join(__dirname, 'pages.txt');
+
+function pause(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), ms);
+  });
+}
+
+async function getNextPageUrl(page) {
+  return page.evaluate(() => {
+    const link = document.querySelector('h1 + center table td:nth-child(3) a');
+    return link?.href ?? null;
+  });
+}
+
+async function getBookText(page, bookPageUrl) {
+  await page.goto(bookPageUrl);
+  const htmlVersionUrl = await page.evaluate(() => {
+    const link = document.querySelector('hr + div a:nth-child(2)');
+    return link?.href ?? null;
+  });
+
+  if (!htmlVersionUrl) return null;
+
+  if (!htmlVersionUrl.toLowerCase().startsWith(BASE_URL)) {
+    return '[non-aozora link, skipped]';
+  }
+
+  await page.goto(htmlVersionUrl);
+
+  return page.evaluate(() => {
+    const title = document.querySelector('.title');
+    const author = document.querySelector('.author');
+    const text = document.querySelector('.main_text');
+    return [title, author, text]
+      .map((el) => (el ? el.innerHTML : ''))
+      .join('\n');
+  });
+}
+
+function shouldAbortUrl(url) {
+  const u = url.toLowerCase();
+  return (
+    u.endsWith('.png') ||
+    u.endsWith('.jpg') ||
+    u.endsWith('.jpeg') ||
+    u.endsWith('.gif') ||
+    u.endsWith('.js') ||
+    u.endsWith('.css') ||
+    !u.startsWith(BASE_URL)
+  );
+}
+
+async function setRequestInterceptionFilter(page) {
+  await page.setRequestInterception(true);
+  page.on('request', (interceptedRequest) => {
+    if (interceptedRequest.isInterceptResolutionHandled()) return;
+    if (shouldAbortUrl(interceptedRequest.url())) {
+      interceptedRequest.abort();
+    } else {
+      interceptedRequest.continue();
+    }
+  });
+}
+
+async function getIndexUrls(page) {
+  await page.goto(BASE_URL);
+  // await page.waitForSelector('[summary="作品リスト"]');
+  return page.evaluate(() => {
+    return [
+      ...document.querySelectorAll('[summary="作品リスト"] tbody td a'),
+    ].map((anchor) => [anchor.textContent.trim(), anchor.href]);
+  });
+}
+
+async function isNotFound(page) {
+  return page.evaluate(() => !!document.querySelector('input[value="戻る"]'));
+}
+
+async function getBookUrlsFromCurrentPage(page) {
+  return page.evaluate(() => {
+    return [...document.querySelectorAll('a[href*="cards"]')].map(
+      (anchor) => anchor.href,
+    );
+  });
+}
+
+async function collectBookPagesUrls(page, indexUrls) {
+  const urls = [];
+  for (const [indexCharacter, indexUrl] of indexUrls) {
+    console.log(`Getting the list of pages for ${indexCharacter}...`);
+    await page.goto(indexUrl);
+    const notFound = await isNotFound(page);
+    if (notFound) continue;
+    while (true) {
+      const newUrls = await getBookUrlsFromCurrentPage(page);
+      urls.push(...newUrls);
+      console.log(`Got +${newUrls.length} URLs, ${urls.length} total`);
+      const nextPageUrl = await getNextPageUrl(page);
+      if (nextPageUrl) {
+        await page.goto(nextPageUrl);
+      } else {
+        break;
+      }
+    }
+    // await pause(100);
+  }
+
+  console.log(`Collected ${urls.length} URLs`);
+  writeFileSync(PAGES_FILE, urls.join('\n'), {
+    encoding: 'utf-8',
+  });
+
+  return urls;
+}
+
+async function getBookPagesUrls(page) {
+  if (existsSync(PAGES_FILE)) {
+    const urlsFromFile = readFileSync(PAGES_FILE, { encoding: 'utf-8' }).split(
+      '\n',
+    );
+    console.log(`Read ${urlsFromFile.length} URLs from ${PAGES_FILE}`);
+    return urlsFromFile;
+  }
+
+  const indexUrls = await getIndexUrls(page);
+  return collectBookPagesUrls(page, indexUrls);
+}
+
+function getFilePathForBookUrl(bookUrl) {
+  const linkParts = bookUrl.split('/');
+  const fileName = [
+    linkParts[linkParts.length - 2],
+    linkParts[linkParts.length - 1].replace(/html$/i, 'txt'),
+  ].join('_');
+  return join(__dirname, 'pages', fileName);
+}
+
+async function downloadBookContents(page, bookUrls) {
+  let bookUrlsProcessed = 0;
+  for (const bookUrl of bookUrls) {
+    const filePath = getFilePathForBookUrl(bookUrl);
+
+    if (!existsSync(filePath)) {
+      const contents = await getBookText(page, bookUrl);
+      if (contents) {
+        writeFileSync(filePath, contents, {
+          encoding: 'utf-8',
+        });
+      }
+    }
+
+    bookUrlsProcessed += 1;
+
+    if (bookUrlsProcessed % 10 === 0) {
+      const percent = ((100 * bookUrlsProcessed) / bookUrls.length).toFixed(2);
+      console.log(
+        `Downloaded contents of ${bookUrlsProcessed}/${bookUrls.length} URLs, ${percent}%...`,
+      );
+      // await pause(100);
+    }
+  }
+}
+
+async function run() {
+  const browser = await puppeteer.launch({ product: 'chrome' });
+  const page = await browser.newPage();
+  await setRequestInterceptionFilter(page);
+
+  const bookUrls = await getBookPagesUrls(page);
+  await downloadBookContents(page, bookUrls);
+
+  await browser.close();
+}
+
+run();

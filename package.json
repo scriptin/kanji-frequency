@@ -15,6 +15,11 @@
     "type": "git",
     "url": "https://github.com/scriptin/kanji-frequency.git"
   },
-  "scripts": {},
-  "dependencies": {}
+  "scripts": {
+    "aozora:download": "node scripts/aozora/download.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.2",
+    "puppeteer": "^19.5.2"
+  }
 }
