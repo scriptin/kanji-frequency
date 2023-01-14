@@ -2,8 +2,14 @@ const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const puppeteer = require('puppeteer');
 
-const BASE_URL = 'https://www.aozora.gr.jp/';
-const PAGES_FILE = join(__dirname, 'pages.txt');
+const {
+  BASE_URL,
+  PAGES_URLS_FILE,
+  PAGES_FILES_DIR,
+  percent,
+} = require('./common');
+
+const PAGES_FILE_PATH = join(__dirname, PAGES_URLS_FILE);
 
 function pause(ms) {
   return new Promise((resolve) => {
@@ -119,7 +125,7 @@ async function collectBookPagesUrls(page, indexUrls) {
   }
 
   console.log(`Collected ${urls.length} URLs`);
-  writeFileSync(PAGES_FILE, urls.join('\n'), {
+  writeFileSync(PAGES_FILE_PATH, urls.join('\n'), {
     encoding: 'utf-8',
   });
 
@@ -127,11 +133,11 @@ async function collectBookPagesUrls(page, indexUrls) {
 }
 
 async function getBookPagesUrls(page) {
-  if (existsSync(PAGES_FILE)) {
-    const urlsFromFile = readFileSync(PAGES_FILE, { encoding: 'utf-8' }).split(
-      '\n',
-    );
-    console.log(`Read ${urlsFromFile.length} URLs from ${PAGES_FILE}`);
+  if (existsSync(PAGES_FILE_PATH)) {
+    const urlsFromFile = readFileSync(PAGES_FILE_PATH, {
+      encoding: 'utf-8',
+    }).split('\n');
+    console.log(`Read ${urlsFromFile.length} URLs from ${PAGES_FILE_PATH}`);
     return urlsFromFile;
   }
 
@@ -145,7 +151,7 @@ function getFilePathForBookUrl(bookUrl) {
     linkParts[linkParts.length - 2],
     linkParts[linkParts.length - 1].replace(/html$/i, 'txt'),
   ].join('_');
-  return join(__dirname, 'pages', fileName);
+  return join(__dirname, PAGES_FILES_DIR, fileName);
 }
 
 async function downloadBookContents(page, bookUrls) {
@@ -171,9 +177,9 @@ async function downloadBookContents(page, bookUrls) {
     bookUrlsProcessed += 1;
 
     if (bookUrlsProcessed % 10 === 0) {
-      const percent = ((100 * bookUrlsProcessed) / bookUrls.length).toFixed(2);
+      const pct = percent(bookUrlsProcessed, bookUrls.length);
       console.log(
-        `Downloaded contents of ${bookUrlsProcessed}/${bookUrls.length} URLs, ${percent}%...`,
+        `Downloaded contents of ${bookUrlsProcessed}/${bookUrls.length} URLs, ${pct}%...`,
       );
       // await pause(100);
     }

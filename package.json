@@ -16,7 +16,8 @@
     "url": "https://github.com/scriptin/kanji-frequency.git"
   },
   "scripts": {
-    "aozora:download": "node scripts/aozora/download.js"
+    "aozora:download": "node scripts/aozora/download.js",
+    "aozora:gaiji": "node scripts/aozora/getGaiji.js"
   },
   "devDependencies": {
     "prettier": "^2.8.2",
