@@ -18,6 +18,16 @@ async function getNextPageUrl(page) {
   });
 }
 
+/**
+ * Get book contents (separated with '\n'):
+ * - title
+ * - author name
+ * - text - HTML
+ *
+ * @param {import('puppeteer').Page} page
+ * @param {string} bookPageUrl
+ * @returns {Promise<string|null>} Returns `null` then there is no link, or it's a non-aozora link
+ */
 async function getBookText(page, bookPageUrl) {
   await page.goto(bookPageUrl);
   const htmlVersionUrl = await page.evaluate(() => {
@@ -26,10 +36,7 @@ async function getBookText(page, bookPageUrl) {
   });
 
   if (!htmlVersionUrl) return null;
-
-  if (!htmlVersionUrl.toLowerCase().startsWith(BASE_URL)) {
-    return '[non-aozora link, skipped]';
-  }
+  if (!htmlVersionUrl.toLowerCase().startsWith(BASE_URL)) return null;
 
   await page.goto(htmlVersionUrl);
 
@@ -145,11 +152,17 @@ async function downloadBookContents(page, bookUrls) {
   let bookUrlsProcessed = 0;
   for (const bookUrl of bookUrls) {
     const filePath = getFilePathForBookUrl(bookUrl);
+    const skippedFilePath = filePath.replace(/\.txt$/, '.skip.txt');
 
-    if (!existsSync(filePath)) {
+    if (!existsSync(filePath) && !existsSync(skippedFilePath)) {
       const contents = await getBookText(page, bookUrl);
       if (contents) {
         writeFileSync(filePath, contents, {
+          encoding: 'utf-8',
+        });
+      } else {
+        // Create a dummy file to prevent re-downloading attempts
+        writeFileSync(skippedFilePath, '!', {
           encoding: 'utf-8',
         });
       }
