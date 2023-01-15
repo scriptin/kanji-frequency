@@ -17,7 +17,7 @@
   },
   "scripts": {
     "aozora:download": "node scripts/aozora/download.js",
-    "aozora:gaiji": "node scripts/aozora/getGaiji.js"
+    "aozora:gaiji": "node scripts/aozora/gaiji.js"
   },
   "devDependencies": {
     "prettier": "^2.8.2",
