@@ -4,5 +4,7 @@ public/
 
 .idea/
 
-scripts/aozora/pages/*
-!scripts/aozora/pages/.gitkeep
+scripts/*/data/*
+!scripts/*/data/.gitkeep
+scripts/*/data_clean/*
+!scripts/*/data_clean/.gitkeep
