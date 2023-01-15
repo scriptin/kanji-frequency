@@ -7,9 +7,11 @@
   "license": "CC-BY-4.0",
   "keywords": [
     "kanji",
+    "han",
+    "character",
     "frequency",
     "japanese",
-    "charts"
+    "cjk"
   ],
   "repository": {
     "type": "git",
