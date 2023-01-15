@@ -2,7 +2,7 @@ const { readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const {
-  PAGES_FILES_DIR,
+  DATA_DIR,
   percent,
   GAIJI_FILE,
   GAIJI_IMG_ALL_REGEX,
@@ -11,7 +11,7 @@ const {
 } = require('./common');
 
 function run() {
-  const files = readdirSync(join(__dirname, PAGES_FILES_DIR)).filter(
+  const files = readdirSync(join(__dirname, DATA_DIR)).filter(
     (f) => f.endsWith('.txt') && !f.endsWith('.skip.txt'),
   );
 
@@ -19,7 +19,7 @@ function run() {
   for (const [index, file] of files.entries()) {
     if (file.endsWith('.skip.txt') || !file.endsWith('.txt')) continue;
 
-    const contents = readFileSync(join(__dirname, PAGES_FILES_DIR, file), {
+    const contents = readFileSync(join(__dirname, DATA_DIR, file), {
       encoding: 'utf-8',
     });
     for (const matches of contents.matchAll(GAIJI_IMG_ALL_REGEX)) {

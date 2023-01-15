@@ -2,12 +2,7 @@ const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const puppeteer = require('puppeteer');
 
-const {
-  BASE_URL,
-  PAGES_URLS_FILE,
-  PAGES_FILES_DIR,
-  percent,
-} = require('./common');
+const { BASE_URL, PAGES_URLS_FILE, DATA_DIR, percent } = require('./common');
 
 const PAGES_FILE_PATH = join(__dirname, PAGES_URLS_FILE);
 
@@ -151,7 +146,7 @@ function getFilePathForBookUrl(bookUrl) {
     linkParts[linkParts.length - 2],
     linkParts[linkParts.length - 1].replace(/html$/i, 'txt'),
   ].join('_');
-  return join(__dirname, PAGES_FILES_DIR, fileName);
+  return join(__dirname, DATA_DIR, fileName);
 }
 
 async function downloadBookContents(page, bookUrls) {

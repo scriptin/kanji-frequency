@@ -32,8 +32,8 @@ module.exports = {
   BASE_URL,
   // paths are relative
   PAGES_URLS_FILE: 'pages.csv',
-  PAGES_FILES_DIR: 'pages',
-  PAGES_FILES_CLEAN_DIR: 'pages_clean',
+  DATA_DIR: 'data',
+  DATA_CLEAN_DIR: 'data_clean',
   GAIJI_FILE: 'gaiji.csv',
   GAIJI_REPLACEMENTS_FILE: 'gaiji_replacements.csv',
   percent,
