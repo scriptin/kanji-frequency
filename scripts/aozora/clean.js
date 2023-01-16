@@ -38,6 +38,19 @@ function removeTags(text) {
     .replace(SELF_CLOSE_TAG_REGEX, '');
 }
 
+function validateGaijiReplacements(gaijiReplacements) {
+  const invalidGaijiIndex = gaijiReplacements.findIndex(
+    (r) => r.length < 3 || !r[0],
+  );
+  if (invalidGaijiIndex > -1) {
+    throw new Error(
+      `Invalid replacement format at line ${invalidGaijiIndex + 1}: ${
+        gaijiReplacements[invalidGaijiIndex]
+      }`,
+    );
+  }
+}
+
 function run() {
   const gaijiReplacementsFilePath = join(__dirname, GAIJI_REPLACEMENTS_FILE);
   const gaijiReplacements = readFileSync(gaijiReplacementsFilePath, {
@@ -45,6 +58,8 @@ function run() {
   })
     .split('\n')
     .map((line) => line.split(','));
+
+  validateGaijiReplacements(gaijiReplacements);
 
   const srcPath = join(__dirname, DATA_DIR);
   const dstPath = join(__dirname, DATA_CLEAN_DIR);
