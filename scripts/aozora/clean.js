@@ -57,7 +57,8 @@ function run() {
     encoding: 'utf-8',
   })
     .split('\n')
-    .map((line) => line.split(','));
+    .filter((line) => line.trim().length > 0)
+    .map((line) => line.split(',')); // empty line at the end
 
   validateGaijiReplacements(gaijiReplacements);
 
