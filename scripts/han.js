@@ -14,9 +14,12 @@ const HAN_RANGES = [
   [0x2f800, 0x2fa1f], // CJK Compatibility Ideographs Supplement
 ];
 
+// 々 IDEOGRAPHIC ITERATION MARK
+const IDEOGRAPHIC_ITERATION_MARK_CODE_POINT = 0x3005;
+
 const HAN_EXT_RANGES = [
   // CJK Symbols and Punctuation:
-  [0x3005], // 々 IDEOGRAPHIC ITERATION MARK
+  [IDEOGRAPHIC_ITERATION_MARK_CODE_POINT],
   [0x3006], // 〆 IDEOGRAPHIC CLOSING MARK
 
   // CJK Strokes:
@@ -84,7 +87,7 @@ function isHanExt(str) {
 }
 
 function isIterationMark(str) {
-  return str.codePointAt(0) === 0x3005;
+  return str.codePointAt(0) === IDEOGRAPHIC_ITERATION_MARK_CODE_POINT;
 }
 
 module.exports = {
