@@ -3,12 +3,12 @@ const { join } = require('path');
 
 const {
   DATA_DIR,
-  percent,
   GAIJI_FILE,
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,
   getGaijiSrc,
 } = require('./common');
+const { percent } = require('../reporter');
 
 function run() {
   const files = readdirSync(join(__dirname, DATA_DIR)).filter(

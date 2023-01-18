@@ -1,9 +1,5 @@
 const BASE_URL = 'https://www.aozora.gr.jp/';
 
-function percent(value, total) {
-  return ((100 * value) / total).toFixed(2);
-}
-
 const GAIJI_IMG_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/i;
 const GAIJI_IMG_ALL_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/gi;
 const SRC_ATTR_REGEX = /src="(.*?)"/i;
@@ -36,7 +32,6 @@ module.exports = {
   DATA_CLEAN_DIR: 'data_clean',
   GAIJI_FILE: 'gaiji.csv',
   GAIJI_REPLACEMENTS_FILE: 'gaiji_replacements.csv',
-  percent,
   GAIJI_IMG_REGEX,
   GAIJI_IMG_ALL_REGEX,
   ALT_ATTR_REGEX,

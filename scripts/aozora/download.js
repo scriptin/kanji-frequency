@@ -2,7 +2,8 @@ const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const puppeteer = require('puppeteer');
 
-const { BASE_URL, PAGES_URLS_FILE, DATA_DIR, percent } = require('./common');
+const { BASE_URL, PAGES_URLS_FILE, DATA_DIR } = require('./common');
+const { percent } = require('../reporter');
 
 const PAGES_FILE_PATH = join(__dirname, PAGES_URLS_FILE);
 

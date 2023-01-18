@@ -5,11 +5,11 @@ const {
   DATA_DIR,
   DATA_CLEAN_DIR,
   GAIJI_REPLACEMENTS_FILE,
-  percent,
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,
   getGaijiSrc,
 } = require('./common');
+const { percent } = require('../reporter');
 
 function replaceGaiji(text, gaijiReplacements) {
   let result = text;
