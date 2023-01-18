@@ -19,11 +19,18 @@ class ConsoleReporter {
     this.reportEveryNItems = reportEveryNItems;
   }
 
+  _needToReport(itemCount) {
+    if (itemCount % this.reportEveryNItems === 0) return true;
+    return itemCount === this.totalItems;
+  }
+
   /**
    * @param {number} itemCount
    * @param {MessageGenerator} [additionalMessage]
    */
   report(itemCount, additionalMessage) {
+    if (!this._needToReport(itemCount)) return;
+
     const pct = this.message.includes('{PERCENT}')
       ? percent(itemCount, this.totalItems)
       : '';
