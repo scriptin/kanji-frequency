@@ -3,7 +3,7 @@ const { join } = require('path');
 const puppeteer = require('puppeteer');
 
 const { BASE_URL, PAGES_URLS_FILE, DATA_DIR } = require('./common');
-const { percent } = require('../reporter');
+const { ConsoleReporter } = require('../reporter');
 
 const PAGES_FILE_PATH = join(__dirname, PAGES_URLS_FILE);
 
@@ -151,8 +151,13 @@ function getFilePathForBookUrl(bookUrl) {
 }
 
 async function downloadBookContents(page, bookUrls) {
-  let bookUrlsProcessed = 0;
-  for (const bookUrl of bookUrls) {
+  const reporter = new ConsoleReporter(
+    'Downloaded contents of {COUNT}/{TOTAL} URLs, {PERCENT}%...',
+    bookUrls.length,
+    10,
+  );
+
+  for (const [index, bookUrl] of bookUrls.entries()) {
     const filePath = getFilePathForBookUrl(bookUrl);
     const skippedFilePath = filePath.replace(/\.txt$/, '.skip.txt');
 
@@ -170,15 +175,7 @@ async function downloadBookContents(page, bookUrls) {
       }
     }
 
-    bookUrlsProcessed += 1;
-
-    if (bookUrlsProcessed % 10 === 0) {
-      const pct = percent(bookUrlsProcessed, bookUrls.length);
-      console.log(
-        `Downloaded contents of ${bookUrlsProcessed}/${bookUrls.length} URLs, ${pct}%...`,
-      );
-      // await pause(100);
-    }
+    reporter.report(index + 1);
   }
 }
 

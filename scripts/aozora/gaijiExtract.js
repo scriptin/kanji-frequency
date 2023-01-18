@@ -8,11 +8,17 @@ const {
   getGaijiAlt,
   getGaijiSrc,
 } = require('./common');
-const { percent } = require('../reporter');
+const { ConsoleReporter } = require('../reporter');
 
 function run() {
   const files = readdirSync(join(__dirname, DATA_DIR)).filter(
     (f) => f.endsWith('.txt') && !f.endsWith('.skip.txt'),
+  );
+
+  const reporter = new ConsoleReporter(
+    'Processed contents of {COUNT}/{TOTAL} files, {PERCENT}%...',
+    files.length,
+    1000,
   );
 
   const images = new Set();
@@ -27,13 +33,11 @@ function run() {
         matches.forEach((m) => images.add(m));
       }
     }
-    if ((index + 1) % 1000 === 0) {
-      const pct = percent(index + 1, files.length);
-      console.log(
-        `Processed contents of ${index + 1}/${files.length} files, ${pct}%...`,
-      );
-      console.log(`Found ${images.size} unique gaiji images`);
-    }
+
+    reporter.report(
+      index + 1,
+      () => `Found ${images.size} unique gaiji images...`,
+    );
   }
   console.log(`Found total ${images.size} unique gaiji images`);
 

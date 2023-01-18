@@ -9,7 +9,7 @@ const {
   getGaijiAlt,
   getGaijiSrc,
 } = require('./common');
-const { percent } = require('../reporter');
+const { ConsoleReporter } = require('../reporter');
 
 function replaceGaiji(text, gaijiReplacements) {
   let result = text;
@@ -68,6 +68,12 @@ function run() {
     (f) => f.endsWith('.txt') && !f.endsWith('.skip.txt'),
   );
 
+  const reporter = new ConsoleReporter(
+    'Cleaned contents of {COUNT}/{TOTAL} files, {PERCENT}%...',
+    srcFiles.length,
+    1000,
+  );
+
   for (const [index, srcFileName] of srcFiles.entries()) {
     const contents = readFileSync(join(srcPath, srcFileName), {
       encoding: 'utf-8',
@@ -76,12 +82,7 @@ function run() {
     const dstFilePath = join(dstPath, srcFileName);
     writeFileSync(dstFilePath, cleanContents, { encoding: 'utf-8' });
 
-    if ((index + 1) % 1000 === 0) {
-      const pct = percent(index + 1, srcFiles.length);
-      console.log(
-        `Cleaned contents of ${index + 1}/${srcFiles.length} files, ${pct}%...`,
-      );
-    }
+    reporter.report(index + 1);
   }
 
   console.log(`Cleaned total ${srcFiles.length} files`);
