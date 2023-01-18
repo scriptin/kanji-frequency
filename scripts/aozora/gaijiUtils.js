@@ -1,6 +1,5 @@
-const BASE_URL = 'https://www.aozora.gr.jp/';
+const { BASE_URL } = require('./constants');
 
-const GAIJI_IMG_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/i;
 const GAIJI_IMG_ALL_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/gi;
 const SRC_ATTR_REGEX = /src="(.*?)"/i;
 const ALT_ATTR_REGEX = /alt="(.*?)"/i;
@@ -25,17 +24,7 @@ function getGaijiSrc(imgHtml) {
 }
 
 module.exports = {
-  BASE_URL,
-  // paths are relative
-  PAGES_URLS_FILE: 'pages.csv',
-  DATA_DIR: 'data',
-  DATA_CLEAN_DIR: 'data_clean',
-  GAIJI_FILE: 'gaiji.csv',
-  GAIJI_REPLACEMENTS_FILE: 'gaiji_replacements.csv',
-  GAIJI_IMG_REGEX,
   GAIJI_IMG_ALL_REGEX,
-  ALT_ATTR_REGEX,
-  SRC_ATTR_REGEX,
   getGaijiAlt,
   getGaijiSrc,
 };

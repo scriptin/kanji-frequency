@@ -1,7 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const { GAIJI_REPLACEMENTS_FILE } = require('./common');
+const { GAIJI_REPLACEMENTS_FILE } = require('./constants');
 
 GAIJI_CODE_REGEX = /\d-\d{1,2}-\d{1,2}/g;
 function getGaijiCodes(alt, src) {

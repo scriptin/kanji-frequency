@@ -5,10 +5,12 @@ const {
   DATA_DIR,
   DATA_CLEAN_DIR,
   GAIJI_REPLACEMENTS_FILE,
+} = require('./constants');
+const {
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,
   getGaijiSrc,
-} = require('./common');
+} = require('./gaijiUtils');
 const { ConsoleReporter } = require('../reporter');
 
 function replaceGaiji(text, gaijiReplacements) {

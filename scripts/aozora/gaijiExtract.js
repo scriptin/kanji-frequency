@@ -1,13 +1,12 @@
 const { readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
+const { DATA_DIR, GAIJI_FILE } = require('./constants');
 const {
-  DATA_DIR,
-  GAIJI_FILE,
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,
   getGaijiSrc,
-} = require('./common');
+} = require('./gaijiUtils');
 const { ConsoleReporter } = require('../reporter');
 
 function run() {
