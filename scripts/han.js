@@ -83,9 +83,14 @@ function isHanExt(str) {
   return isInRanges(str, HAN_EXT_RANGES);
 }
 
+function isIterationMark(str) {
+  return str.codePointAt(0) === 0x3005;
+}
+
 module.exports = {
   HAN_RANGES,
   HAN_EXT_RANGES,
   isHan,
   isHanExt,
+  isIterationMark,
 };
