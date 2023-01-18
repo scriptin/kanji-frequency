@@ -41,7 +41,51 @@ const HAN_EXT_RANGES = [
   [0x1f250, 0x1f251], // circled
 ];
 
+/**
+ * Use with `String.@@iterator` because it's Unicode-aware:
+ *
+ * ```
+ * for (let char of 'some unicode string') {
+ *   console.log(isInRanges(char, ranges));
+ * }
+ * ```
+ *
+ * @param {string} str
+ * @param {Array<Array<number>>} ranges
+ * @returns {boolean}
+ */
+function isInRanges(str, ranges) {
+  const codePoint = str.codePointAt(0);
+  for (const range of ranges) {
+    if (range.length === 1 && codePoint === range[0]) return true;
+    if (range.length === 2 && codePoint >= range[0] && codePoint <= range[1]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Use with `String.@@iterator` because it's Unicode-aware
+ * @param {string} str
+ * @returns {boolean}
+ */
+function isHan(str) {
+  return isInRanges(str, HAN_RANGES);
+}
+
+/**
+ * Use with `String.@@iterator` because it's Unicode-aware
+ * @param {string} str
+ * @returns {boolean}
+ */
+function isHanExt(str) {
+  return isInRanges(str, HAN_EXT_RANGES);
+}
+
 module.exports = {
   HAN_RANGES,
   HAN_EXT_RANGES,
+  isHan,
+  isHanExt,
 };
