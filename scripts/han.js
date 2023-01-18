@@ -16,6 +16,7 @@ const HAN_RANGES = [
 
 // 々 IDEOGRAPHIC ITERATION MARK
 const IDEOGRAPHIC_ITERATION_MARK_CODE_POINT = 0x3005;
+const IDEOGRAPHIC_ITERATION_MARK = String.fromCodePoint(0x3005);
 
 const HAN_EXT_RANGES = [
   // CJK Symbols and Punctuation:
@@ -87,7 +88,7 @@ function isHanExt(str) {
 }
 
 function isIterationMark(str) {
-  return str.codePointAt(0) === IDEOGRAPHIC_ITERATION_MARK_CODE_POINT;
+  return str === IDEOGRAPHIC_ITERATION_MARK;
 }
 
 module.exports = {
@@ -95,5 +96,6 @@ module.exports = {
   HAN_EXT_RANGES,
   isHan,
   isHanExt,
+  IDEOGRAPHIC_ITERATION_MARK_CODE_POINT,
   isIterationMark,
 };
