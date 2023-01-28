@@ -157,7 +157,7 @@ async function downloadBookContents(page, bookUrls) {
     10,
   );
 
-  for (const [index, bookUrl] of bookUrls.entries()) {
+  for (const bookUrl of bookUrls) {
     const filePath = getFilePathForBookUrl(bookUrl);
     const skippedFilePath = filePath.replace(/\.txt$/, '.skip.txt');
 
@@ -175,7 +175,7 @@ async function downloadBookContents(page, bookUrls) {
       }
     }
 
-    reporter.report(index + 1);
+    reporter.update();
   }
 }
 

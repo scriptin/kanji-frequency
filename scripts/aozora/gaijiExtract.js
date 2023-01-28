@@ -21,7 +21,7 @@ function run() {
   );
 
   const images = new Set();
-  for (const [index, file] of files.entries()) {
+  for (const file of files) {
     if (file.endsWith('.skip.txt') || !file.endsWith('.txt')) continue;
 
     const contents = readFileSync(join(__dirname, DATA_DIR, file), {
@@ -33,10 +33,7 @@ function run() {
       }
     }
 
-    reporter.report(
-      index + 1,
-      () => `Found ${images.size} unique gaiji images...`,
-    );
+    reporter.update(() => `Found ${images.size} unique gaiji images...`);
   }
   console.log(`Found total ${images.size} unique gaiji images`);
 

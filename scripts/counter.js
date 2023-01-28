@@ -185,7 +185,7 @@ class DatasetHanCounter {
 
   run() {
     const files = readdirSync(this.directoryPath);
-    for (let [fileIndex, fileName] of files.entries()) {
+    for (let fileName of files) {
       const filePath = join(this.directoryPath, fileName);
       const contents = readFileSync(filePath, { encoding: 'utf-8' });
 
@@ -214,7 +214,7 @@ class DatasetHanCounter {
         }
       }
 
-      this.reporter.report(fileIndex + 1);
+      this.reporter.update();
     }
   }
 

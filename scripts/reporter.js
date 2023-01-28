@@ -17,26 +17,27 @@ class ConsoleReporter {
     this.message = message;
     this.totalItems = totalItems;
     this.reportEveryNItems = reportEveryNItems;
+    this._count = 0;
   }
 
-  _needToReport(itemCount) {
-    if (itemCount % this.reportEveryNItems === 0) return true;
-    return itemCount === this.totalItems;
+  _needToReport() {
+    if (this._count % this.reportEveryNItems === 0) return true;
+    return this._count === this.totalItems;
   }
 
   /**
-   * @param {number} itemCount
    * @param {MessageGenerator} [additionalMessage]
    */
-  report(itemCount, additionalMessage) {
-    if (!this._needToReport(itemCount)) return;
+  update(additionalMessage) {
+    this._count += 1;
+    if (!this._needToReport()) return;
 
     const pct = this.message.includes('{PERCENT}')
-      ? percent(itemCount, this.totalItems)
+      ? percent(this._count, this.totalItems)
       : '';
     console.log(
       this.message
-        .replaceAll('{COUNT}', itemCount.toString())
+        .replaceAll('{COUNT}', this._count.toString())
         .replaceAll('{TOTAL}', this.totalItems.toString())
         .replaceAll('{PERCENT}', pct),
     );
@@ -47,6 +48,5 @@ class ConsoleReporter {
 }
 
 module.exports = {
-  percent,
   ConsoleReporter,
 };

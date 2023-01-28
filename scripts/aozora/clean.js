@@ -76,7 +76,7 @@ function run() {
     1000,
   );
 
-  for (const [index, srcFileName] of srcFiles.entries()) {
+  for (const srcFileName of srcFiles) {
     const contents = readFileSync(join(srcPath, srcFileName), {
       encoding: 'utf-8',
     });
@@ -84,7 +84,7 @@ function run() {
     const dstFilePath = join(dstPath, srcFileName);
     writeFileSync(dstFilePath, cleanContents, { encoding: 'utf-8' });
 
-    reporter.report(index + 1);
+    reporter.update();
   }
 
   console.log(`Cleaned total ${srcFiles.length} files`);
