@@ -16,8 +16,8 @@ function run() {
 
   const reporter = new ConsoleReporter(
     'Processed contents of {COUNT}/{TOTAL} files, {PERCENT}%...',
-    files.length,
     1000,
+    files.length,
   );
 
   const images = new Set();

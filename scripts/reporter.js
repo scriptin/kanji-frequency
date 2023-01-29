@@ -10,19 +10,19 @@ function percent(value, total) {
 class ConsoleReporter {
   /**
    * @param {string} message These will be replaced by values: "{COUNT}", "{TOTAL}", "{PERCENT}"
-   * @param {number} totalItems
    * @param {number} reportEveryNItems
+   * @param {number | null | undefined} [totalItems] Set to `null` when total count cannot be determined
    */
-  constructor(message, totalItems, reportEveryNItems) {
+  constructor(message, reportEveryNItems, totalItems) {
     this.message = message;
-    this.totalItems = totalItems;
     this.reportEveryNItems = reportEveryNItems;
+    this.totalItems = totalItems;
     this._count = 0;
   }
 
   _needToReport() {
     if (this._count % this.reportEveryNItems === 0) return true;
-    return this._count === this.totalItems;
+    return this.totalItems ? this._count === this.totalItems : false;
   }
 
   /**
@@ -32,13 +32,16 @@ class ConsoleReporter {
     this._count += 1;
     if (!this._needToReport()) return;
 
-    const pct = this.message.includes('{PERCENT}')
-      ? percent(this._count, this.totalItems)
-      : '';
+    const needPercents =
+      this.message.includes('{PERCENT}') && !!this.totalItems;
+    const pct = needPercents ? percent(this._count, this.totalItems) : '?';
     console.log(
       this.message
         .replaceAll('{COUNT}', this._count.toString())
-        .replaceAll('{TOTAL}', this.totalItems.toString())
+        .replaceAll(
+          '{TOTAL}',
+          this.totalItems ? this.totalItems.toString() : 'unknown',
+        )
         .replaceAll('{PERCENT}', pct),
     );
     if (additionalMessage) {

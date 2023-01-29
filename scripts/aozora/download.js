@@ -153,8 +153,8 @@ function getFilePathForBookUrl(bookUrl) {
 async function downloadBookContents(page, bookUrls) {
   const reporter = new ConsoleReporter(
     'Downloaded contents of {COUNT}/{TOTAL} URLs, {PERCENT}%...',
-    bookUrls.length,
     10,
+    bookUrls.length,
   );
 
   for (const bookUrl of bookUrls) {

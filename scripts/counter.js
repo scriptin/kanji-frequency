@@ -173,8 +173,8 @@ class DatasetHanCounter {
     const reportEvery = 10 ** (datasetSizeOrder < 2 ? 1 : datasetSizeOrder - 1);
     this.reporter = new ConsoleReporter(
       'Processed {COUNT}/{TOTAL} files, {PERCENT}%...',
-      fileNames.length,
       reportEvery,
+      fileNames.length,
     );
 
     // Counter for "normal" Han characters

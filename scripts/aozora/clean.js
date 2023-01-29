@@ -72,8 +72,8 @@ function run() {
 
   const reporter = new ConsoleReporter(
     'Cleaned contents of {COUNT}/{TOTAL} files, {PERCENT}%...',
-    srcFiles.length,
     1000,
+    srcFiles.length,
   );
 
   for (const srcFileName of srcFiles) {
