@@ -20,6 +20,15 @@ class ConsoleReporter {
     this._count = 0;
   }
 
+  /**
+   * In case you're continuing from previously interrupted task,
+   * set this as initial count.
+   * @param {number} count
+   */
+  setCount(count) {
+    this._count = count;
+  }
+
   _needToReport() {
     if (this._count % this.reportEveryNItems === 0) return true;
     return this.totalItems ? this._count === this.totalItems : false;
