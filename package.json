@@ -5,6 +5,9 @@
   "version": "0.0.0",
   "private": true,
   "license": "CC-BY-4.0",
+  "engines": {
+    "node": "^18.13.0"
+  },
   "keywords": [
     "kanji",
     "han",
@@ -22,10 +25,14 @@
     "aozora:gaiji:extract": "node scripts/aozora/gaijiExtract.js",
     "aozora:gaiji:replacements": "node scripts/aozora/gaijiReplacements.js",
     "aozora:clean": "node scripts/aozora/clean.js",
-    "aozora:count": "node scripts/aozora/count.js"
+    "aozora:count": "node scripts/aozora/count.js",
+    "wikipedia:fetch": "node scripts/wikipedia/fetch.js",
+    "wikipedia:count": "node scripts/wikipedia/count.js"
   },
   "devDependencies": {
+    "@types/xml-flow": "^1.0.1",
     "prettier": "^2.8.2",
-    "puppeteer": "^19.5.2"
+    "puppeteer": "^19.5.2",
+    "xml-flow": "^1.0.4"
   }
 }
