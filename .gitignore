@@ -6,3 +6,7 @@ public/
 
 scripts/**/data*/*
 !scripts/**/data*/.gitkeep
+
+data/test*
+
+.DS_Store
