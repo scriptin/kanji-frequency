@@ -1,4 +1,4 @@
-const { BASE_URL } = require('./constants');
+const { BASE_URL } = require('./config');
 
 const GAIJI_IMG_ALL_REGEX = /<img[^>]*?gaiji[^>]*?\/?>/gi;
 const SRC_ATTR_REGEX = /src="(.*?)"/i;

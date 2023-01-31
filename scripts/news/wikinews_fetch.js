@@ -1,7 +1,11 @@
 const { readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const { DATA_CLEAN_DIR, MAX_UNIQUE_ARTICLES } = require('./constants');
+const {
+  WIKINEWS_API_URL,
+  DATA_CLEAN_DIR,
+  MAX_UNIQUE_ARTICLES,
+} = require('./config');
 const { ConsoleReporter } = require('../reporter');
 const {
   fetchWithContinue,
@@ -9,8 +13,6 @@ const {
   getPagesOrStop,
   getTitleAndText,
 } = require('../wiki');
-
-const API_URL = 'https://ja.wikinews.org/w/api.php';
 
 const DATE_REGEX = /^【(\d{4})年(\d{1,2})月(\d{1,2})日】/;
 
@@ -41,7 +43,7 @@ async function run() {
   reporter.setCount(fetchedArticles.length);
 
   while (fetchedArticles.length <= MAX_UNIQUE_ARTICLES) {
-    const json = await fetchWithContinue(API_URL, continueParams);
+    const json = await fetchWithContinue(WIKINEWS_API_URL, continueParams);
     continueParams = getContinueParams(json);
 
     const pages = getPagesOrStop(json);

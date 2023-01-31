@@ -1,7 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const { DATA_CLEAN_DIR, MAX_UNIQUE_ARTICLES } = require('./constants');
+const { API_URL, DATA_CLEAN_DIR, MAX_UNIQUE_ARTICLES } = require('./config');
 const { ConsoleReporter } = require('../reporter');
 const {
   fetchWithContinue,
@@ -9,8 +9,6 @@ const {
   getPagesOrStop,
   getTitleAndText,
 } = require('../wiki');
-
-const API_URL = 'https://ja.wikipedia.org/w/api.php';
 
 async function run() {
   let continueParams = {};

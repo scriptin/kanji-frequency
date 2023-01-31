@@ -1,7 +1,7 @@
 const { readdirSync } = require('fs');
 const { join } = require('path');
 
-const { DATA_CLEAN_DIR } = require('./constants');
+const { DATA_CLEAN_DIR } = require('./config');
 const { DatasetHanCounter } = require('../counter');
 
 function run() {

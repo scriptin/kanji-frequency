@@ -1,7 +1,7 @@
 const { readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const { DATA_DIR, GAIJI_FILE } = require('./constants');
+const { DATA_DIR, GAIJI_FILE } = require('./config');
 const {
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,

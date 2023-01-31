@@ -5,7 +5,7 @@ const {
   DATA_DIR,
   DATA_CLEAN_DIR,
   GAIJI_REPLACEMENTS_FILE,
-} = require('./constants');
+} = require('./config');
 const {
   GAIJI_IMG_ALL_REGEX,
   getGaijiAlt,
