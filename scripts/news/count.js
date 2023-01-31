@@ -9,13 +9,10 @@ function run() {
   const files = readdirSync(dirPath).filter((f) => f.endsWith('.txt'));
 
   const reportsDir = join(__dirname, '..', '..', 'data');
-  const countReportFile = join(reportsDir, 'wikinews_characters.csv');
-  const filesCountReportFile = join(reportsDir, 'wikinews_documents.csv');
-  const extCountReportFile = join(reportsDir, 'wikinews_characters_ext.csv');
-  const extFilesCountReportFile = join(
-    reportsDir,
-    'wikinews_documents_ext.csv',
-  );
+  const countReportFile = join(reportsDir, 'news_characters.csv');
+  const filesCountReportFile = join(reportsDir, 'news_documents.csv');
+  const extCountReportFile = join(reportsDir, 'news_characters_ext.csv');
+  const extFilesCountReportFile = join(reportsDir, 'news_documents_ext.csv');
 
   const counter = new DatasetHanCounter(dirPath, files);
   counter.run();
