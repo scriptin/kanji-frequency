@@ -1,0 +1,50 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Card from '@components/Card.astro';
+import Stats from '@components/Stats.astro';
+---
+
+<Layout title="Kanji usage frequency">
+  <div class="px-8 py-8 mb-4 rounded-lg bg-gradient-to-br from-white to-sky-100 text-sky-900">
+    <h1 class="mb-4 text-6xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-sky-600">
+      Kanji usage frequency
+    </h1>
+    <p class="mb-2 text-xl font-light">
+      Datasets built from different Japanese language corpora.
+    </p>
+    <p class="text-sm flex flex-wrap gap-x-3 gap-y-1">
+      <a href="https://github.com/scriptin/kanji-frequency/tree/master/data" class="font-bold">Download</a>
+      <a href="https://github.com/scriptin/kanji-frequency">GitHub</a>
+      <a href="/kanji-frequency/methods">Methods</a>
+    </p>
+  </div>
+  <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <Card
+      href="/kanji-frequency/aozora"
+      title="Aozora"
+    >
+      Books from <a href="https://www.aozora.gr.jp/" class="link-inverted">Aozora Bunko</a>
+      <Stats class="mt-2" textsCount="3451" totalKanjiCount="3500670" uniqueKanjiCount="4301" />
+    </Card>
+    <Card
+      href="/kanji-frequency/wikipedia"
+      title="Wikipedia"
+    >
+      Articles from <a href="https://ja.wikipedia.org/" class="link-inverted">Japanese Wikipedia</a>
+      <Stats class="mt-2" textsCount="12650" totalKanjiCount="11925740" uniqueKanjiCount="6556" />
+    </Card>
+    <Card
+      href="/kanji-frequency/news"
+      title="News"
+    >
+      News articles from <a href="https://ja.wikinews.org/" class="link-inverted">Japanese Wikinews</a>
+      <Stats class="mt-2" textsCount="2300" totalKanjiCount="1204052" uniqueKanjiCount="3290" />
+    </Card>
+    <Card
+      href="/kanji-frequency/old-dataset"
+      title="Older datasets"
+    >
+      Previous version of these datasets from 2015. Includes a much larger news and Twitter corpus, but has many issues.
+    </Card>
+  </ul>
+</Layout>

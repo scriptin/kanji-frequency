@@ -1,6 +1,5 @@
 node_modules/
-bower_components/
-public/
+dist/
 
 .idea/
 
@@ -8,5 +7,12 @@ scripts/**/data*/*
 !scripts/**/data*/.gitkeep
 
 data/test*
+
+.astro/
+
+npm-debug.log*
+
+.env
+.env.production
 
 .DS_Store
