@@ -19,32 +19,42 @@ import Stats from '@components/Stats.astro';
     </p>
   </div>
   <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <Card
-      href="/kanji-frequency/aozora"
-      title="Aozora"
-    >
-      Books from <a href="https://www.aozora.gr.jp/" class="link-inverted">Aozora Bunko</a>
-      <Stats class="mt-2" textsCount="3451" totalKanjiCount="3500670" uniqueKanjiCount="4301" />
-    </Card>
-    <Card
-      href="/kanji-frequency/wikipedia"
-      title="Wikipedia"
-    >
-      Articles from <a href="https://ja.wikipedia.org/" class="link-inverted">Japanese Wikipedia</a>
-      <Stats class="mt-2" textsCount="12650" totalKanjiCount="11925740" uniqueKanjiCount="6556" />
-    </Card>
-    <Card
-      href="/kanji-frequency/news"
-      title="News"
-    >
-      News articles from <a href="https://ja.wikinews.org/" class="link-inverted">Japanese Wikinews</a>
-      <Stats class="mt-2" textsCount="2300" totalKanjiCount="1204052" uniqueKanjiCount="3290" />
-    </Card>
-    <Card
-      href="/kanji-frequency/old-dataset"
-      title="Older datasets"
-    >
-      Previous version of these datasets from 2015. Includes a much larger news and Twitter corpus, but has many issues.
-    </Card>
+    <li>
+      <Card
+        href="/kanji-frequency/aozora"
+        title="Aozora"
+      >
+        Books from <a href="https://www.aozora.gr.jp/" class="link-inverted">Aozora Bunko</a>
+        <Stats class="mt-2" textsCount="3451" totalKanjiCount="3500670" uniqueKanjiCount="4301" />
+      </Card>
+    </li>
+    <li>
+      <Card
+        href="/kanji-frequency/wikipedia"
+        title="Wikipedia"
+      >
+        Articles from <a href="https://ja.wikipedia.org/" class="link-inverted">Japanese Wikipedia</a>
+        <Stats class="mt-2" textsCount="12650" totalKanjiCount="11925740" uniqueKanjiCount="6556" />
+      </Card>
+    </li>
+    <li>
+      <Card
+        href="/kanji-frequency/news"
+        title="News"
+      >
+        News articles from <a href="https://ja.wikinews.org/" class="link-inverted">Japanese Wikinews</a>
+        <Stats class="mt-2" textsCount="2300" totalKanjiCount="1204052" uniqueKanjiCount="3290" />
+      </Card>
+    </li>
+    <li>
+      <Card
+        href="/kanji-frequency/old-dataset"
+        title="Older datasets"
+      >
+        Previous version of these datasets from&nbsp;2015.
+        Includes a much larger news corpus and additional Twitter corpus,
+        but has many issues.
+      </Card>
+    </li>
   </ul>
 </Layout>
