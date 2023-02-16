@@ -7,6 +7,7 @@ const {
   IDEOGRAPHIC_ITERATION_MARK_CODE_POINT,
   isIterationMark,
 } = require('./han');
+const { toCsv } = require('./csv');
 const { ConsoleReporter } = require('./reporter');
 
 const ITERATION_MARK_SEQUENCE_REGEX = new RegExp(
@@ -106,14 +107,6 @@ function addRankAndCodePointColumns(countData) {
   });
 
   return result;
-}
-
-/**
- * @param {*[][]} data
- * @return {string}
- */
-function toCsv(data) {
-  return data.map((row) => row.join(',')).join('\n');
 }
 
 function writeCharactersCountReport(reportFilePath, countData) {
