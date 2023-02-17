@@ -1,18 +1,20 @@
 ---
 export interface Props {
-	inverted?: boolean;
+  inverted?: boolean;
   class?: string;
 }
 
 const { inverted, class: className } = Astro.props;
 ---
 
-<div class:list={[
-  "px-8 pt-7 pb-8 rounded-lg bg-gradient-to-br",
-  inverted
-    ? "from-sky-600 to-sky-700 text-sky-50"
-    : "from-white to-sky-100 text-sky-900",
-  className,
-]}>
+<div
+  class:list={[
+    'px-8 pt-7 pb-8 rounded-lg bg-gradient-to-br',
+    inverted
+      ? 'from-sky-600 to-sky-700 text-sky-50'
+      : 'from-white to-sky-100 text-sky-900',
+    className,
+  ]}
+>
   <slot />
 </div>

@@ -25,18 +25,23 @@ import newsDocuments from '@data/news_documents.csv';
       Datasets built from different Japanese language corpora.
     </p>
     <p class="text-sm flex flex-wrap gap-x-3 gap-y-1">
-      <a href="https://github.com/scriptin/kanji-frequency/tree/master/data" class="font-bold">Download</a>
+      <a
+        href="https://github.com/scriptin/kanji-frequency/tree/master/data"
+        class="font-bold"
+      >
+        Download
+      </a>
       <a href="https://github.com/scriptin/kanji-frequency">GitHub</a>
       <a href="/kanji-frequency/methods">Methods</a>
     </p>
   </Box>
   <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <li>
-      <Card
-        href="/kanji-frequency/aozora"
-        title="Aozora"
-      >
-        Books from <a href="https://www.aozora.gr.jp/" class="link-inverted">Aozora Bunko</a>
+      <Card href="/kanji-frequency/aozora" title="Aozora">
+        Books from
+        <a href="https://www.aozora.gr.jp/" class="link-inverted">
+          Aozora Bunko
+        </a>
         <Stats
           class="mt-2"
           textsCount={aozoraDocuments[0].doc_count}
@@ -46,11 +51,11 @@ import newsDocuments from '@data/news_documents.csv';
       </Card>
     </li>
     <li>
-      <Card
-        href="/kanji-frequency/wikipedia"
-        title="Wikipedia"
-      >
-        Articles from <a href="https://ja.wikipedia.org/" class="link-inverted">Japanese Wikipedia</a>
+      <Card href="/kanji-frequency/wikipedia" title="Wikipedia">
+        Articles from
+        <a href="https://ja.wikipedia.org/" class="link-inverted">
+          Japanese Wikipedia
+        </a>
         <Stats
           class="mt-2"
           textsCount={wikipediaDocuments[0].doc_count}
@@ -60,11 +65,11 @@ import newsDocuments from '@data/news_documents.csv';
       </Card>
     </li>
     <li>
-      <Card
-        href="/kanji-frequency/news"
-        title="News"
-      >
-        News articles from <a href="https://ja.wikinews.org/" class="link-inverted">Japanese Wikinews</a>
+      <Card href="/kanji-frequency/news" title="News">
+        News articles from
+        <a href="https://ja.wikinews.org/" class="link-inverted">
+          Japanese Wikinews
+        </a>
         <Stats
           class="mt-2"
           textsCount={newsDocuments[0].doc_count}
@@ -74,13 +79,9 @@ import newsDocuments from '@data/news_documents.csv';
       </Card>
     </li>
     <li>
-      <Card
-        href="/kanji-frequency/old-version"
-        title="Old version"
-      >
-        Previous version of these datasets from&nbsp;2015.
-        Includes a much larger news corpus and additional Twitter corpus,
-        but has many issues.
+      <Card href="/kanji-frequency/old-version" title="Old version">
+        Previous version of these datasets from&nbsp;2015. Includes a much
+        larger news corpus and additional Twitter corpus, but has many issues.
       </Card>
     </li>
   </ul>

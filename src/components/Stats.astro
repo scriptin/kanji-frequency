@@ -1,8 +1,8 @@
 ---
 export interface Props {
-	textsCount: number;
-	totalKanjiCount: number;
-	uniqueKanjiCount: number;
+  textsCount: number;
+  totalKanjiCount: number;
+  uniqueKanjiCount: number;
   class?: string;
 }
 
@@ -25,19 +25,19 @@ const data = [
 ---
 
 <div class="@container">
-  <div class:list={[
-    className,
-    `flex flex-col @[18rem]:flex-row flex-wrap gap-x-3 gap-y-1 text-sky-100`
-  ]}>
-    {data.map(({ title, value }) => (
-      <div class="flex flex-row @[18rem]:flex-col gap-2 @[18rem]:gap-0 first:pl-0 first:border-l-0 @[18rem]:pl-3 @[18rem]:border-l @[18rem]:border-l-sky-300/20">
-        <div class="text-xs text-sky-300 uppercase">
-          {title}
+  <div
+    class:list={[
+      className,
+      `flex flex-col @[18rem]:flex-row flex-wrap gap-x-3 gap-y-1 text-sky-100`,
+    ]}
+  >
+    {
+      data.map(({ title, value }) => (
+        <div class="flex flex-row @[18rem]:flex-col gap-2 @[18rem]:gap-0 first:pl-0 first:border-l-0 @[18rem]:pl-3 @[18rem]:border-l @[18rem]:border-l-sky-300/20">
+          <div class="text-xs text-sky-300 uppercase">{title}</div>
+          <div class="text-xs @[18rem]:text-base">{value}</div>
         </div>
-        <div class="text-xs @[18rem]:text-base">
-          {value}
-        </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </div>
