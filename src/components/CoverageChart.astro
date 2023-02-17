@@ -86,7 +86,7 @@ const axisColor = 'rgb(23 23 23)'; // text-neutral-900
             margin,
           )}
           stroke={datasets[datasetKey].color}
-          stroke-width={1}
+          stroke-width={1.5}
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-opacity={1}
@@ -95,4 +95,21 @@ const axisColor = 'rgb(23 23 23)'; // text-neutral-900
       ))
     }
   </svg>
+  <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center">
+    {
+      Object.keys(datasets)
+        .reverse()
+        .map((datasetKey) => (
+          <div class="flex gap-1">
+            <div
+              class="font-bold"
+              style={{ color: datasets[datasetKey].color }}
+            >
+              &mdash;
+            </div>
+            <div>{datasetKey}</div>
+          </div>
+        ))
+    }
+  </div>
 </div>
