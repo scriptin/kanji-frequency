@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^3.0.1",
+    "@rollup/plugin-dsv": "^3.0.2",
     "astro": "^2.0.12",
     "tailwindcss": "^3.2.6"
   },

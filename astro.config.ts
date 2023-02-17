@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
+import tailwind from '@astrojs/tailwind';
+import dsv from '@rollup/plugin-dsv';
 
 // https://astro.build/config
 export default defineConfig({
@@ -7,5 +8,10 @@ export default defineConfig({
   base: '/kanji-frequency',
   integrations: [
     tailwind(),
-  ]
+  ],
+  vite: {
+    plugins: [
+      dsv(),
+    ],
+  },
 });
