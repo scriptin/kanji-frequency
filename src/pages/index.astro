@@ -11,6 +11,11 @@ import wikipediaCharacters from '@data/wikipedia_characters.csv';
 import wikipediaDocuments from '@data/wikipedia_documents.csv';
 import newsCharacters from '@data/news_characters.csv';
 import newsDocuments from '@data/news_documents.csv';
+import CoverageChart from '@components/CoverageChart.astro';
+
+const aozoraColor = 'rgb(3 105 161)'; // text-sky-700
+const wikipediaColor = 'rgb(185 28 28)'; // text-red-700
+const newsColor = 'rgb(21 128 61)'; // text-green-700
 ---
 
 <Layout title="Kanji usage frequency">
@@ -86,7 +91,23 @@ import newsDocuments from '@data/news_documents.csv';
     </li>
   </ul>
   <Box>
-    <Heading level={3}>Chart</Heading>
-    <p>TODO</p>
+    <Heading level={3}>Coverage of corpora, by characters</Heading>
+    <CoverageChart
+      takeFirst={1000}
+      datasets={{
+        aozora: {
+          data: aozoraCharacters,
+          color: aozoraColor,
+        },
+        wikipedia: {
+          data: wikipediaCharacters,
+          color: wikipediaColor,
+        },
+        news: {
+          data: newsCharacters,
+          color: newsColor,
+        },
+      }}
+    />
   </Box>
 </Layout>

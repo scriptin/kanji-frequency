@@ -1,0 +1,98 @@
+---
+interface DataRow {
+  char_count: number;
+}
+
+export interface Props {
+  takeFirst: number;
+  datasets: {
+    [key: string]: {
+      data: DataRow[];
+      color: string;
+    };
+  };
+}
+
+const width = 400;
+const height = 250;
+const margin = 25;
+
+const { datasets, takeFirst } = Astro.props;
+
+function coverage(data: DataRow[], takeFirst: number): number[] {
+  const total = +data[0].char_count;
+
+  let accumulator = 0;
+  return data.slice(1, 1 + takeFirst).map(({ char_count }) => {
+    accumulator += +char_count;
+    return accumulator / total;
+  });
+}
+
+function coverageLine(
+  coverage: number[],
+  width: number,
+  height: number,
+  margin: number,
+): string {
+  const fromX = margin;
+  const toX = width - margin;
+  const rangeX = toX - fromX;
+  const stepX = rangeX / coverage.length;
+
+  const fromY = margin;
+  const toY = height - margin;
+  const rangeY = toY - fromY;
+
+  return coverage
+    .map((cov, index) => {
+      const op = index === 0 ? 'M' : 'L';
+      const x = fromX + index * stepX;
+      const y = toY - rangeY * cov;
+      return `${op} ${x} ${y}`;
+    })
+    .join(' ');
+}
+
+const axisColor = 'rgb(23 23 23)'; // text-neutral-900
+---
+
+<div>
+  <svg
+    width={width}
+    height={height}
+    viewBox={[0, 0, width, height].join(' ')}
+    style="width: 100%; height: auto; height: intrinsic;"
+  >
+    <path
+      d={`M ${margin} ${height - margin} L ${margin}, ${margin}`}
+      stroke={axisColor}
+      stroke-width={1}
+      fill="none"></path>
+    <path
+      d={`M ${margin} ${height - margin} L ${width - margin}, ${
+        height - margin
+      }`}
+      stroke={axisColor}
+      stroke-width={1}
+      fill="none"></path>
+    {
+      Object.keys(datasets).map((datasetKey) => (
+        <path
+          d={coverageLine(
+            coverage(datasets[datasetKey].data, takeFirst),
+            width,
+            height,
+            margin,
+          )}
+          stroke={datasets[datasetKey].color}
+          stroke-width={1}
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-opacity={1}
+          fill="none"
+        />
+      ))
+    }
+  </svg>
+</div>
