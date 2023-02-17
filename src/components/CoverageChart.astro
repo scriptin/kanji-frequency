@@ -11,13 +11,12 @@ export interface Props {
       color: string;
     };
   };
+  width: number;
+  height: number;
+  margin: number;
 }
 
-const width = 400;
-const height = 250;
-const margin = 25;
-
-const { datasets, takeFirst } = Astro.props;
+const { datasets, takeFirst, width, height, margin } = Astro.props;
 
 function coverage(data: DataRow[], takeFirst: number): number[] {
   const total = +data[0].char_count;
@@ -55,6 +54,11 @@ function coverageLine(
 }
 
 const axisColor = 'rgb(23 23 23)'; // text-neutral-900
+
+const xAxisPath = `M ${margin} ${height - margin} L ${width - margin} ${
+  height - margin
+}`;
+const yAxisPath = `M ${margin} ${height - margin} L ${margin} ${margin}`;
 ---
 
 <div>
@@ -64,18 +68,8 @@ const axisColor = 'rgb(23 23 23)'; // text-neutral-900
     viewBox={[0, 0, width, height].join(' ')}
     style="width: 100%; height: auto; height: intrinsic;"
   >
-    <path
-      d={`M ${margin} ${height - margin} L ${margin}, ${margin}`}
-      stroke={axisColor}
-      stroke-width={1}
-      fill="none"></path>
-    <path
-      d={`M ${margin} ${height - margin} L ${width - margin}, ${
-        height - margin
-      }`}
-      stroke={axisColor}
-      stroke-width={1}
-      fill="none"></path>
+    <path d={xAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>
+    <path d={yAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>
     {
       Object.keys(datasets).map((datasetKey) => (
         <path

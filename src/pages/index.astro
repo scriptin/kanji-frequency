@@ -94,6 +94,9 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
     <Heading level={3}>Coverage of corpora, by characters</Heading>
     <CoverageChart
       takeFirst={1000}
+      width={400}
+      height={250}
+      margin={25}
       datasets={{
         aozora: {
           data: aozoraCharacters,
