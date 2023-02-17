@@ -7,6 +7,7 @@ module.exports = {
 	plugins: [
     function ({ addBase, theme }) {
       addBase({
+        // Basic links
         'a': {
           textDecoration: 'underline',
           textDecorationColor: theme('textColor.sky[500]'),
@@ -16,7 +17,7 @@ module.exports = {
           textDecoration: 'underline',
           textDecorationColor: theme('textColor.sky[900]'),
         },
-
+        // Inverted links
         'a.link-inverted': {
           textDecoration: 'underline',
           textDecorationColor: theme('textColor.sky[300]'),
@@ -26,7 +27,7 @@ module.exports = {
           textDecoration: 'underline',
           textDecorationColor: theme('textColor.sky[100]'),
         },
-
+        // Plain links - no underline or other decorations
         'a.link-plain': {
           textDecoration: 'inherit',
         },
