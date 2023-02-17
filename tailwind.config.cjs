@@ -5,6 +5,7 @@ module.exports = {
 		extend: {},
 	},
 	plugins: [
+    require('@tailwindcss/container-queries'),
     function ({ addBase, theme }) {
       addBase({
         // Basic links
