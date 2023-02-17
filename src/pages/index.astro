@@ -1,7 +1,16 @@
 ---
+import { csvParse } from 'd3-dsv';
+
 import Layout from '@layouts/Layout.astro';
 import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
+
+import aozoraCharacters from '@data/aozora_characters.csv';
+import aozoraDocuments from '@data/aozora_documents.csv';
+import wikipediaCharacters from '@data/wikipedia_characters.csv';
+import wikipediaDocuments from '@data/wikipedia_documents.csv';
+import newsCharacters from '@data/news_characters.csv';
+import newsDocuments from '@data/news_documents.csv';
 ---
 
 <Layout title="Kanji usage frequency">
@@ -25,7 +34,12 @@ import Stats from '@components/Stats.astro';
         title="Aozora"
       >
         Books from <a href="https://www.aozora.gr.jp/" class="link-inverted">Aozora Bunko</a>
-        <Stats class="mt-2" textsCount="3451" totalKanjiCount="3500670" uniqueKanjiCount="4301" />
+        <Stats
+          class="mt-2"
+          textsCount={aozoraDocuments[0].doc_count}
+          totalKanjiCount={aozoraCharacters[0].char_count}
+          uniqueKanjiCount={aozoraCharacters.length}
+        />
       </Card>
     </li>
     <li>
@@ -34,7 +48,12 @@ import Stats from '@components/Stats.astro';
         title="Wikipedia"
       >
         Articles from <a href="https://ja.wikipedia.org/" class="link-inverted">Japanese Wikipedia</a>
-        <Stats class="mt-2" textsCount="12650" totalKanjiCount="11925740" uniqueKanjiCount="6556" />
+        <Stats
+          class="mt-2"
+          textsCount={wikipediaDocuments[0].doc_count}
+          totalKanjiCount={wikipediaCharacters[0].char_count}
+          uniqueKanjiCount={wikipediaCharacters.length}
+        />
       </Card>
     </li>
     <li>
@@ -43,7 +62,12 @@ import Stats from '@components/Stats.astro';
         title="News"
       >
         News articles from <a href="https://ja.wikinews.org/" class="link-inverted">Japanese Wikinews</a>
-        <Stats class="mt-2" textsCount="2300" totalKanjiCount="1204052" uniqueKanjiCount="3290" />
+        <Stats
+          class="mt-2"
+          textsCount={newsDocuments[0].doc_count}
+          totalKanjiCount={newsCharacters[0].char_count}
+          uniqueKanjiCount={newsCharacters.length}
+        />
       </Card>
     </li>
     <li>

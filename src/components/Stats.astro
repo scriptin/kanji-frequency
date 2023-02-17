@@ -13,15 +13,13 @@ const {
 } = Astro.props;
 
 function humanReadable(n) {
-  if (n > 1_000_000) {
-     return `${(n / 1_000_000).toFixed(2)}M`;
-  }
+  return new Intl.NumberFormat('en-US').format(n);
 }
 
 const data = [
-  { title: 'Texts', value: textsCount },
-  { title: 'Total kanji', value: humanReadable(totalKanjiCount), rounded: true },
-  { title: 'Uniq. kanji', value: uniqueKanjiCount },
+  { title: 'Texts', value: humanReadable(textsCount) },
+  { title: 'Total kanji', value: humanReadable(totalKanjiCount) },
+  { title: 'Uniq. kanji', value: humanReadable(uniqueKanjiCount) },
 ];
 ---
 
@@ -35,7 +33,6 @@ const data = [
 	      {title}
 	    </div>
 	    <div>
-	      {rounded && <span class="text-sky-300">≈</span>}
 	      {value}
 	    </div>
 	  </div>
