@@ -1,18 +1,32 @@
+# Node.js, NPM
 node_modules/
-dist/
-
-.idea/
-
-scripts/**/data*/*
-!scripts/**/data*/.gitkeep
-
-data/test*
-
-.astro/
-
 npm-debug.log*
 
+# Mac OS X
+.DS_Store
+
+# Build artifacts
+dist/
+
+# IDEs
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+# Dataset scripts, test data
+scripts/**/data*/*
+!scripts/**/data*/.gitkeep
+data/test*
+
+# Astro
+.astro/
+
+# Environment
 .env
 .env.production
-
-.DS_Store
