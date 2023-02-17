@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Box from '@components/Box.astro';
+import Heading from '@components/Heading.astro';
 import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
 
@@ -13,10 +14,13 @@ import newsDocuments from '@data/news_documents.csv';
 ---
 
 <Layout title="Kanji usage frequency">
-  <Box class="mb-4">
-    <h1 class="mb-4 text-4xl sm:text-6xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-sky-600">
+  <Box>
+    <Heading
+      level={1}
+      class="uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-sky-600"
+    >
       Kanji usage frequency
-    </h1>
+    </Heading>
     <p class="mb-2 text-xl font-light">
       Datasets built from different Japanese language corpora.
     </p>
@@ -80,4 +84,8 @@ import newsDocuments from '@data/news_documents.csv';
       </Card>
     </li>
   </ul>
+  <Box>
+    <Heading level={3}>Chart</Heading>
+    <p>TODO</p>
+  </Box>
 </Layout>

@@ -1,5 +1,6 @@
 ---
 import Box from '@components/Box.astro';
+import Heading from '@components/Heading.astro';
 
 export interface Props {
 	title: string;
@@ -11,10 +12,10 @@ const { href, title } = Astro.props;
 
 <Box inverted>
 	<a href={href} class="link-plain text-sky-100 hover:text-white hover:drop-shadow">
-		<h2 class="drop-shadow-sm text-2xl md:text-3xl font-bold mb-1">
+		<Heading level={2}>
 			{title}
 			<span>&rarr;</span>
-		</h2>
+		</Heading>
 	</a>
   <p>
     <slot />

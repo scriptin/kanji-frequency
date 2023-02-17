@@ -1,0 +1,32 @@
+---
+export interface Props {
+  level: number;
+  class?: string;
+  children: any;
+}
+
+function getHeadingElement(level: number): any {
+  return `h${level}`;
+}
+
+function getHeadingSizeClasses(level: number): string {
+  switch (level) {
+    case 1: return 'text-4xl md:text-6xl mb-4';
+    case 2: return 'text-2xl md:text-3xl mb-1';
+    case 3: return 'text-xl md:text-2xl mb-1';
+    default: return 'text-lg mb-1';
+  }
+}
+
+const { level, class: className } = Astro.props;
+
+const Element = getHeadingElement(level);
+---
+
+<Element class:list={[
+  "drop-shadow-sm font-black mb-1",
+  getHeadingSizeClasses(level),
+  className,
+]}>
+  <slot />
+</Element>
