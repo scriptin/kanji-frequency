@@ -4,6 +4,7 @@ interface DataRow {
 }
 
 export interface Props {
+  class?: string;
   takeFirst: number;
   datasets: {
     [key: string]: {
@@ -23,6 +24,7 @@ export interface Props {
 }
 
 const {
+  class: className,
   datasets,
   takeFirst,
   width,
@@ -89,7 +91,7 @@ function range(start: number, end: number, step: number): number[] {
 }
 ---
 
-<div>
+<div class={className}>
   <svg
     width={width}
     height={height}

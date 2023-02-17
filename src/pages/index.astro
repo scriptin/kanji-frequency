@@ -85,14 +85,15 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
     </li>
     <li>
       <Card href="/kanji-frequency/old-version" title="Old version">
-        Previous version of these datasets from&nbsp;2015. Includes a much
-        larger news corpus and additional Twitter corpus, but has many issues.
+        Previous version of these datasets from 2015. Includes a much larger
+        news corpus and additional Twitter corpus, but has many issues.
       </Card>
     </li>
   </ul>
   <Box>
-    <Heading level={3}>Coverage of corpora, by characters</Heading>
+    <Heading level={3}>Coverage of corpora</Heading>
     <CoverageChart
+      class="mb-4"
       takeFirst={1000}
       width={400}
       height={250}
@@ -116,5 +117,19 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
         },
       }}
     />
+    <p class="mb-2">
+      This diagram shows how many of the first most frequent kanji one needs to
+      know in order to be able to read a given fraction of each corpus.
+    </p>
+    <p class="mb-2">
+      For example, if a person knows the first 100 most frequent kanji from the
+      "news" dataset (green line), they are albe to read ~45% of kanji in news
+      articles. Knowing 300 most frequenct kanji will ensure ~72% of
+      comprehension. Knowing 1000 results in ~96% understanding.
+    </p>
+    <p>
+      See
+      <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf's law</a>
+    </p>
   </Box>
 </Layout>
