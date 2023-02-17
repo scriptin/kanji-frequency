@@ -3,6 +3,7 @@ export interface Props {
 	textsCount: number;
 	totalKanjiCount: number;
 	uniqueKanjiCount: number;
+  class?: string;
 }
 
 const {
@@ -12,7 +13,7 @@ const {
   class: className,
 } = Astro.props;
 
-function humanReadable(n) {
+function humanReadable(n: number) {
   return new Intl.NumberFormat('en-US').format(n);
 }
 
@@ -27,7 +28,7 @@ const data = [
   className,
   "flex flex-wrap gap-x-3 gap-y-1 text-sky-100"
 ]}>
-	{data.map(({ title, value, rounded = false }) => (
+	{data.map(({ title, value }) => (
 	  <div class="flex flex-col first:pl-0 first:border-l-0 pl-3 border-l border-l-sky-300/20">
 	    <div class="text-xs text-sky-300 uppercase">
 	      {title}
