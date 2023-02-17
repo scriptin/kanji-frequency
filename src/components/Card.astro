@@ -1,4 +1,6 @@
 ---
+import Box from '@components/Box.astro';
+
 export interface Props {
 	title: string;
 	href: string;
@@ -7,14 +9,14 @@ export interface Props {
 const { href, title } = Astro.props;
 ---
 
-<div class="px-8 pt-6 pb-8 rounded-lg bg-gradient-to-br from-sky-600 to-sky-700">
+<Box inverted>
 	<a href={href} class="link-plain text-sky-100 hover:text-white hover:drop-shadow">
 		<h2 class="drop-shadow-sm text-2xl md:text-3xl font-bold mb-1">
 			{title}
 			<span>&rarr;</span>
 		</h2>
 	</a>
-	<p class="text-gray-50">
+	<p>
     <slot />
   </p>
   <p class="mt-4">
@@ -22,4 +24,4 @@ const { href, title } = Astro.props;
       Explore
     </a>
   <p>
-</div>
+</Box>
