@@ -1,9 +1,9 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
+import { getCollection } from 'astro:content';
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Box from '@components/Box.astro';
-import Heading from '@components/Heading.astro';
 import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
 import Card from '@components/Card.astro';
@@ -16,12 +16,30 @@ import wikipediaDocuments from '@data/wikipedia_documents.csv';
 import newsCharacters from '@data/news_characters.csv';
 import newsDocuments from '@data/news_documents.csv';
 
+const csv: any = {
+  aozora: {
+    characters: aozoraCharacters,
+    documents: aozoraDocuments,
+  },
+  wikipedia: {
+    characters: wikipediaCharacters,
+    documents: wikipediaDocuments,
+  },
+  news: {
+    characters: newsCharacters,
+    documents: newsDocuments,
+  },
+};
+
 type Props = MarkdownLayoutProps<{
   title: string;
   subtitle: string;
 }>;
 
 const { title, subtitle } = Astro.props.frontmatter;
+
+const cards = await getCollection('cards');
+cards.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title={title}>
@@ -44,54 +62,36 @@ const { title, subtitle } = Astro.props.frontmatter;
   </Box>
   <div slot="content" class="flex flex-col gap-4">
     <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <li>
-        <Card href="/kanji-frequency/aozora" title="Aozora">
-          Books from
-          <a href="https://www.aozora.gr.jp/" class="link-inverted">
-            Aozora Bunko
-          </a>
-          <Stats
-            class="mt-2"
-            textsCount={aozoraDocuments[0].doc_count}
-            totalKanjiCount={aozoraCharacters[0].char_count}
-            uniqueKanjiCount={aozoraCharacters.length}
-          />
-        </Card>
-      </li>
-      <li>
-        <Card href="/kanji-frequency/wikipedia" title="Wikipedia">
-          Articles from
-          <a href="https://ja.wikipedia.org/" class="link-inverted">
-            Japanese Wikipedia
-          </a>
-          <Stats
-            class="mt-2"
-            textsCount={wikipediaDocuments[0].doc_count}
-            totalKanjiCount={wikipediaCharacters[0].char_count}
-            uniqueKanjiCount={wikipediaCharacters.length}
-          />
-        </Card>
-      </li>
-      <li>
-        <Card href="/kanji-frequency/news" title="News">
-          News articles from
-          <a href="https://ja.wikinews.org/" class="link-inverted">
-            Japanese Wikinews
-          </a>
-          <Stats
-            class="mt-2"
-            textsCount={newsDocuments[0].doc_count}
-            totalKanjiCount={newsCharacters[0].char_count}
-            uniqueKanjiCount={newsCharacters.length}
-          />
-        </Card>
-      </li>
-      <li>
-        <Card href="/kanji-frequency/old-version" title="Old version">
-          Previous version of these datasets from 2015. Includes a much larger
-          news corpus and additional Twitter corpus, but has many issues.
-        </Card>
-      </li>
+      {
+        cards.map(async (card) => {
+          const { Content } = await card.render();
+
+          if (!card.data.csvPrefix) {
+            return (
+              <li>
+                <Card href={card.data.url} title={card.data.title}>
+                  <Content />
+                </Card>
+              </li>
+            );
+          }
+
+          const { characters, documents } = csv[card.data.csvPrefix];
+          return (
+            <li>
+              <Card href={card.data.url} title={card.data.title}>
+                <Content />
+                <Stats
+                  class="mt-2"
+                  textsCount={documents[0].doc_count}
+                  totalKanjiCount={characters[0].char_count}
+                  uniqueKanjiCount={characters.length - 2}
+                />
+              </Card>
+            </li>
+          );
+        })
+      }
     </ul>
     <Box>
       <article class="markdown">
