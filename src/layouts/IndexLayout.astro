@@ -70,7 +70,9 @@ cards.sort((a, b) => a.data.order - b.data.order);
             return (
               <li>
                 <Card href={card.data.url} title={card.data.title}>
-                  <Content />
+                  <div class="markdown">
+                    <Content />
+                  </div>
                 </Card>
               </li>
             );
@@ -80,7 +82,9 @@ cards.sort((a, b) => a.data.order - b.data.order);
           return (
             <li>
               <Card href={card.data.url} title={card.data.title}>
-                <Content />
+                <div class="markdown">
+                  <Content />
+                </div>
                 <Stats
                   class="mt-2"
                   textsCount={documents[0].doc_count}
