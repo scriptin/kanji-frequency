@@ -34,7 +34,6 @@ module.exports = {
           'h2, h3': {
             fontWeight: theme('fontWeight.black'),
             marginBottom: theme('margin[1]'),
-            marginTop: theme('margin[8]'),
             '&:first-child': {
               marginTop: 0,
             },
@@ -42,12 +41,14 @@ module.exports = {
           h2: {
             fontSize: theme('fontSize.2xl'),
             lineHeight: theme('fontSize.2xl.[1].lineHeight'),
+            marginTop: theme('margin[8]'),
           },
           h3: {
             fontSize: theme('fontSize.xl'),
             lineHeight: theme('fontSize.xl[1].lineHeight'),
+            marginTop: theme('margin[4]'),
           },
-          p: {
+          'p, blockquote, ul, ol': {
             marginBottom: theme('margin[4]'),
             '&:last-child': {
               marginBottom: 0,
@@ -61,13 +62,23 @@ module.exports = {
           },
           'ul, ol': {
             listStylePosition: 'outside',
-            marginBottom: theme('margin[4]'),
-            '&:last-child': {
-              marginBottom: 0,
-            },
             li: {
               marginLeft: theme('margin[8]'),
             },
+          },
+          blockquote: {
+            fontStyle: 'italic',
+            borderLeft: `${theme('borderWidth[4]')} solid ${theme(
+              'borderColor.sky[200]',
+            )}`,
+            paddingTop: theme('padding[1]'),
+            paddingBottom: theme('padding[1]'),
+            paddingLeft: theme('padding[4]'),
+          },
+        },
+        '.box-inverted': {
+          blockquote: {
+            borderLeftColor: theme('borderColor.sky[800]'),
           },
         },
         [`@media (min-width: ${theme('screens.md')})`]: {
