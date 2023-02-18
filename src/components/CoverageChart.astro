@@ -19,6 +19,10 @@ export interface Props {
     x: number;
     y: number;
   };
+  labels: {
+    x: string;
+    y: string;
+  };
   fontSize?: number;
   dashArray?: string;
 }
@@ -31,6 +35,7 @@ const {
   height,
   margin,
   scaleLines,
+  labels,
   fontSize = 8,
   dashArray = '5,2',
 } = Astro.props;
@@ -183,7 +188,7 @@ function range(start: number, end: number, step: number): number[] {
       x={margin}
       y={margin - fontSize * 0.5}
     >
-      Coverage of corpus, %
+      {labels.y}
     </text>
     <text
       font-size={fontSize}
@@ -192,7 +197,7 @@ function range(start: number, end: number, step: number): number[] {
       y={height - margin + tickSize + fontSize * 2.5}
       text-anchor="middle"
     >
-      # of first most frequent characters
+      {labels.x}
     </text>
     <path d={xAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>
     <path d={yAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>

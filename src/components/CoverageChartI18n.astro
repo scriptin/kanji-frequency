@@ -1,0 +1,45 @@
+---
+/**
+ * @description A thin wrapper around {@link CoverageChart}
+ * which exposes only text labels for i18n purposes.
+ */
+
+import CoverageChart, {
+  Props as ChartProps,
+} from '@components/CoverageChart.astro';
+
+import aozoraCharacters from '@data/aozora_characters.csv';
+import wikipediaCharacters from '@data/wikipedia_characters.csv';
+import newsCharacters from '@data/news_characters.csv';
+
+export interface Props extends Pick<ChartProps, 'labels'> {}
+
+const { labels } = Astro.props;
+---
+
+<CoverageChart
+  class="mb-4"
+  takeFirst={1000}
+  width={400}
+  height={250}
+  margin={30}
+  scaleLines={{
+    x: 100,
+    y: 0.1,
+  }}
+  labels={labels}
+  datasets={{
+    aozora: {
+      data: aozoraCharacters,
+      color: 'rgb(3 105 161)', // text-sky-700
+    },
+    wikipedia: {
+      data: wikipediaCharacters,
+      color: 'rgb(185 28 28)', // text-red-700
+    },
+    news: {
+      data: newsCharacters,
+      color: 'rgb(21 128 61)', // text-green-700
+    },
+  }}
+/>

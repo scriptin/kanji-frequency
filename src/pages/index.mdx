@@ -51,37 +51,12 @@ in this corpus this particular kanji appears?"
 
 ## Coverage of corpora
 
-import aozoraCharacters from '@data/aozora_characters.csv';
-import aozoraDocuments from '@data/aozora_documents.csv';
-import wikipediaCharacters from '@data/wikipedia_characters.csv';
-import wikipediaDocuments from '@data/wikipedia_documents.csv';
-import newsCharacters from '@data/news_characters.csv';
-import newsDocuments from '@data/news_documents.csv';
-import CoverageChart from '@components/CoverageChart.astro';
+import CoverageChartI18n from '@components/CoverageChartI18n.astro';
 
-<CoverageChart
-  class="mb-4"
-  takeFirst={1000}
-  width={400}
-  height={250}
-  margin={30}
-  scaleLines={{
-    x: 100,
-    y: 0.1,
-  }}
-  datasets={{
-    aozora: {
-      data: aozoraCharacters,
-      color: 'rgb(3 105 161)', // text-sky-700
-    },
-    wikipedia: {
-      data: wikipediaCharacters,
-      color: 'rgb(185 28 28)', // text-red-700
-    },
-    news: {
-      data: newsCharacters,
-      color: 'rgb(21 128 61)', // text-green-700
-    },
+<CoverageChartI18n
+  labels={{
+    x: '# of first most frequent characters',
+    y: 'Coverage of corpus, %',
   }}
 />
 
