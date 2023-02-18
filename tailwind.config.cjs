@@ -13,45 +13,44 @@ module.exports = {
           textDecoration: 'underline',
           textDecorationColor: theme('textColor.sky[500]'),
           textUnderlineOffset: theme('textUnderlineOffset[2]'),
-        },
-        'a:hover': {
-          textDecoration: 'underline',
-          textDecorationColor: theme('textColor.sky[900]'),
+          '&:hover': {
+            textDecoration: 'underline',
+            textDecorationColor: theme('textColor.sky[900]'),
+          },
         },
         // Inverted links
         'a.link-inverted, .box-inverted a': {
           textDecorationColor: theme('textColor.sky[300]'),
-          textUnderlineOffset: theme('textUnderlineOffset[2]'),
-        },
-        'a.link-inverted:hover, .box-inverted a:hover': {
-          textDecorationColor: theme('textColor.sky[100]'),
+          '&:hover': {
+            textDecorationColor: theme('textColor.sky[100]'),
+          },
         },
         // Plain links - no underline or other decorations
         'a.link-plain': {
           textDecoration: 'inherit',
         },
-        // Headings
-        '.markdown h2, .markdown h3': {
-          fontWeight: theme('fontWeight.black'),
-          marginBottom: theme('margin[1]'),
-        },
-        '.markdown h2': {
-          fontSize: theme('fontSize.2xl.'),
-          lineHeight: theme('fontSize.2xl.[1].lineHeight'),
-        },
-        '.markdown h3': {
-          fontSize: theme('fontSize.xl'),
-          lineHeight: theme('fontSize.xl[1].lineHeight'),
-        },
-        '.markdown p + h2, .markdown p + h3': {
-          marginTop: theme('margin[4]'),
-        },
-        // Paragraph
-        '.markdown p': {
-          marginBottom: theme('margin[4]'),
-        },
-        '.markdown p:last-child': {
-          marginBottom: 0,
+        '.markdown': {
+          'h2, h3': {
+            fontWeight: theme('fontWeight.black'),
+            marginBottom: theme('margin[1]'),
+          },
+          h2: {
+            fontSize: theme('fontSize.2xl.'),
+            lineHeight: theme('fontSize.2xl.[1].lineHeight'),
+          },
+          h3: {
+            fontSize: theme('fontSize.xl'),
+            lineHeight: theme('fontSize.xl[1].lineHeight'),
+          },
+          'p + h2, p + h3': {
+            marginTop: theme('margin[4]'),
+          },
+          p: {
+            marginBottom: theme('margin[4]'),
+            '&:last-child': {
+              marginBottom: 0,
+            },
+          },
         },
       });
     },
