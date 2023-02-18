@@ -30,12 +30,13 @@ module.exports = {
           textDecoration: 'inherit',
         },
         '.markdown': {
+          // Headings must match those in src/components/Heading.astro
           'h2, h3': {
             fontWeight: theme('fontWeight.black'),
             marginBottom: theme('margin[1]'),
           },
           h2: {
-            fontSize: theme('fontSize.2xl.'),
+            fontSize: theme('fontSize.2xl'),
             lineHeight: theme('fontSize.2xl.[1].lineHeight'),
           },
           h3: {
@@ -49,6 +50,17 @@ module.exports = {
             marginBottom: theme('margin[4]'),
             '&:last-child': {
               marginBottom: 0,
+            },
+          },
+        },
+        [`@media (min-width: ${theme('screens.md')})`]: {
+          // Headings must match those in src/components/Heading.astro
+          '.markdown': {
+            h2: {
+              fontSize: theme('fontSize.3xl'),
+            },
+            h3: {
+              fontSize: theme('fontSize.2xl'),
             },
           },
         },
