@@ -39,6 +39,7 @@
     "news:dates": "node scripts/news/dates.js"
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.17.0",
     "@astrojs/tailwind": "^3.0.1",
     "@rollup/plugin-dsv": "^3.0.2",
     "@tailwindcss/container-queries": "^0.1.0",

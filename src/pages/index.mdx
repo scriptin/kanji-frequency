@@ -1,0 +1,51 @@
+---
+layout: '@layouts/IndexLayout.astro'
+title: Kanji usage frequency
+subtitle: Datasets built from various Japanese language corpora
+---
+
+import aozoraCharacters from '@data/aozora_characters.csv';
+import aozoraDocuments from '@data/aozora_documents.csv';
+import wikipediaCharacters from '@data/wikipedia_characters.csv';
+import wikipediaDocuments from '@data/wikipedia_documents.csv';
+import newsCharacters from '@data/news_characters.csv';
+import newsDocuments from '@data/news_documents.csv';
+import CoverageChart from '@components/CoverageChart.astro';
+
+## Coverage of corpora
+
+<CoverageChart
+  class="mb-4"
+  takeFirst={1000}
+  width={400}
+  height={250}
+  margin={30}
+  scaleLines={{
+    x: 100,
+    y: 0.1,
+  }}
+  datasets={{
+    aozora: {
+      data: aozoraCharacters,
+      color: 'rgb(3 105 161)', // text-sky-700
+    },
+    wikipedia: {
+      data: wikipediaCharacters,
+      color: 'rgb(185 28 28)', // text-red-700
+    },
+    news: {
+      data: newsCharacters,
+      color: 'rgb(21 128 61)', // text-green-700
+    },
+  }}
+/>
+
+This diagram shows how many of the first most frequent kanji one needs
+to know in order to be able to read a given fraction of each corpus.
+
+For example, if a person knows the first 100 most frequent kanji from
+the "news" dataset (green line), they are albe to read ~45% of kanji
+in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
+comprehension. Knowing 1000 results in ~96% understanding.
+
+See [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)

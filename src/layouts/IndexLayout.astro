@@ -1,4 +1,6 @@
 ---
+import type { MarkdownLayoutProps } from 'astro';
+
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Box from '@components/Box.astro';
 import Heading from '@components/Heading.astro';
@@ -13,19 +15,19 @@ import wikipediaCharacters from '@data/wikipedia_characters.csv';
 import wikipediaDocuments from '@data/wikipedia_documents.csv';
 import newsCharacters from '@data/news_characters.csv';
 import newsDocuments from '@data/news_documents.csv';
-import CoverageChart from '@components/CoverageChart.astro';
 
-const aozoraColor = 'rgb(3 105 161)'; // text-sky-700
-const wikipediaColor = 'rgb(185 28 28)'; // text-red-700
-const newsColor = 'rgb(21 128 61)'; // text-green-700
+type Props = MarkdownLayoutProps<{
+  title: string;
+  subtitle: string;
+}>;
+
+const { title, subtitle } = Astro.props.frontmatter;
 ---
 
-<BaseLayout title="Kanji usage frequency">
+<BaseLayout title={title}>
   <Box slot="header">
-    <PageTitle>Kanji usage frequency</PageTitle>
-    <PageSubtitle>
-      Datasets built from various Japanese language corpora
-    </PageSubtitle>
+    <PageTitle>{title}</PageTitle>
+    <PageSubtitle>{subtitle}</PageSubtitle>
     <p class="flex flex-wrap gap-x-3 gap-y-1">
       <a
         href="https://github.com/scriptin/kanji-frequency/tree/master/data"
@@ -89,48 +91,9 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
       </li>
     </ul>
     <Box>
-      <Heading level={3}>Coverage of corpora</Heading>
-      <CoverageChart
-        class="mb-4"
-        takeFirst={1000}
-        width={400}
-        height={250}
-        margin={30}
-        scaleLines={{
-          x: 100,
-          y: 0.1,
-        }}
-        datasets={{
-          aozora: {
-            data: aozoraCharacters,
-            color: aozoraColor,
-          },
-          wikipedia: {
-            data: wikipediaCharacters,
-            color: wikipediaColor,
-          },
-          news: {
-            data: newsCharacters,
-            color: newsColor,
-          },
-        }}
-      />
-      <div class="markdown">
-        <p>
-          This diagram shows how many of the first most frequent kanji one needs
-          to know in order to be able to read a given fraction of each corpus.
-        </p>
-        <p>
-          For example, if a person knows the first 100 most frequent kanji from
-          the "news" dataset (green line), they are albe to read ~45% of kanji
-          in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
-          comprehension. Knowing 1000 results in ~96% understanding.
-        </p>
-        <p>
-          See
-          <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf's law</a>
-        </p>
-      </div>
+      <article class="markdown">
+        <slot />
+      </article>
     </Box>
   </div>
 </BaseLayout>
