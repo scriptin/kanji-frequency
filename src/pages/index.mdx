@@ -4,6 +4,53 @@ title: Kanji usage frequency
 subtitle: Datasets built from various Japanese language corpora
 ---
 
+## About
+
+This project is an attempt to collect a big set of comparable data
+about Japanese kanji (漢字) usage frequency from various sources.
+
+### History
+
+In 2014-2015, I started this project to answer the following question:
+
+> "In which order should I learn Japanese kanji if I have a goal
+> of reading some specific type of texts, e.g. news?"
+
+The data was collected from the following sources:
+
+- [Aozora Bunko](https://www.aozora.gr.jp/)
+- [Japanese Wikipedia](https://ja.wikipedia.org/)
+- Several popular Japanese news websites:
+  [Asahi](https://www.asahi.com/),
+  [Mainichi](https://mainichi.jp/), etc.
+- Twitter
+
+However, this first attempt lacked sufficient research and technical effort,
+and the resulting datasets have multiple issues, described in the
+[attached readme](https://github.com/scriptin/kanji-frequency/tree/master/data2015/README.md).
+
+### Current version
+
+This new version solves the most of the aforementioned issues,
+but unfortunately has some new problems:
+
+- **Twitter dataset was exluded**:
+  - Twitter API no longer has a free teer,
+  - Changes in the organization management and staff layoffs
+    resulted in insufficient content moderation,
+- **News dataset is much smaller**:
+  - Most news on popular websites are now behind a paywall,
+    making it impractical to create a crawler/scraper,
+  - [Japanese Wikinews](https://ja.wikinews.org/) has way
+    less articles than a typical big news website.
+
+Despite these problems, this new dataset has a better format,
+which includes not only overall character frequency data,
+but also documents count, i.e. "in how many documents
+in this corpus this particular kanji appears?"
+
+## Coverage of corpora
+
 import aozoraCharacters from '@data/aozora_characters.csv';
 import aozoraDocuments from '@data/aozora_documents.csv';
 import wikipediaCharacters from '@data/wikipedia_characters.csv';
@@ -11,8 +58,6 @@ import wikipediaDocuments from '@data/wikipedia_documents.csv';
 import newsCharacters from '@data/news_characters.csv';
 import newsDocuments from '@data/news_documents.csv';
 import CoverageChart from '@components/CoverageChart.astro';
-
-## Coverage of corpora
 
 <CoverageChart
   class="mb-4"
@@ -49,3 +94,8 @@ in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
 comprehension. Knowing 1000 results in ~96% understanding.
 
 See [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)
+
+## Want to contribute?
+
+Start by looking through the [list of issues](https://github.com/scriptin/kanji-frequency/issues),
+and open a new issue if you found a problem or want to otherwise improve this dataset.
