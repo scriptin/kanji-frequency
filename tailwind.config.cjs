@@ -34,6 +34,10 @@ module.exports = {
           'h2, h3': {
             fontWeight: theme('fontWeight.black'),
             marginBottom: theme('margin[1]'),
+            marginTop: theme('margin[8]'),
+            '&:first-child': {
+              marginTop: 0,
+            },
           },
           h2: {
             fontSize: theme('fontSize.2xl'),
@@ -43,13 +47,26 @@ module.exports = {
             fontSize: theme('fontSize.xl'),
             lineHeight: theme('fontSize.xl[1].lineHeight'),
           },
-          'p + h2, p + h3': {
-            marginTop: theme('margin[4]'),
-          },
           p: {
             marginBottom: theme('margin[4]'),
             '&:last-child': {
               marginBottom: 0,
+            },
+          },
+          ul: {
+            listStyleType: 'disc',
+          },
+          ol: {
+            listStyleType: 'decimal',
+          },
+          'ul, ol': {
+            listStylePosition: 'outside',
+            marginBottom: theme('margin[4]'),
+            '&:last-child': {
+              marginBottom: 0,
+            },
+            li: {
+              marginLeft: theme('margin[8]'),
             },
           },
         },
