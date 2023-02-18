@@ -1,0 +1,14 @@
+---
+import Heading from '@components/Heading.astro';
+
+export interface Props {
+  children: any;
+}
+---
+
+<Heading
+  level={1}
+  class="uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-sky-600"
+>
+  <slot />
+</Heading>
