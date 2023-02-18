@@ -28,7 +28,7 @@ const { title, subtitle } = Astro.props.frontmatter;
   <Box slot="header">
     <PageTitle>{title}</PageTitle>
     <PageSubtitle>{subtitle}</PageSubtitle>
-    <p class="flex flex-wrap gap-x-3 gap-y-1">
+    <nav class="flex flex-wrap gap-x-3 gap-y-1">
       <a
         href="https://github.com/scriptin/kanji-frequency/tree/master/data"
         class="font-bold"
@@ -37,7 +37,7 @@ const { title, subtitle } = Astro.props.frontmatter;
       </a>
       <a href="https://github.com/scriptin/kanji-frequency">GitHub</a>
       <a href="/kanji-frequency/about">About</a>
-    </p>
+    </nav>
   </Box>
   <div slot="content" class="flex flex-col gap-4">
     <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
