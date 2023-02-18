@@ -1,0 +1,32 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Box from '@components/Box.astro';
+import PageTitle from '@components/PageTitle.astro';
+import PageSubtitle from '@components/PageSubtitle.astro';
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  subtitle: string;
+}>;
+
+const { title, subtitle } = Astro.props.frontmatter;
+---
+
+<BaseLayout title={`${title} - Kanji usage frequency`}>
+  <Box slot="header">
+    <PageTitle>
+      {title}
+    </PageTitle>
+    <PageSubtitle>
+      {subtitle}
+    </PageSubtitle>
+    <a href="/kanji-frequency/">&larr; Home</a>
+  </Box>
+  <Box inverted slot="content">
+    <article class="markdown">
+      <slot />
+    </article>
+  </Box>
+</BaseLayout>

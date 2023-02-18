@@ -13,7 +13,7 @@ const { href, title } = Astro.props;
 <Box inverted>
   <a
     href={href}
-    class="link-plain text-sky-100 hover:text-white hover:drop-shadow"
+    class="text-sky-100 hover:text-white no-underline hover:no-underline hover:drop-shadow"
   >
     <Heading level={2}>
       {title}
@@ -25,6 +25,6 @@ const { href, title } = Astro.props;
     <slot />
   </p>
   <p class="mt-4">
-    <a href={href} class="text-sm text-gray-50 link-inverted">Explore</a>
+    <a href={href} class="text-sm text-gray-50">Explore</a>
   </p>
 </Box>

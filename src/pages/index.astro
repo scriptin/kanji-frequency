@@ -2,6 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Box from '@components/Box.astro';
 import Heading from '@components/Heading.astro';
+import PageTitle from '@components/PageTitle.astro';
+import PageSubtitle from '@components/PageSubtitle.astro';
 import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
 
@@ -20,16 +22,11 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
 
 <BaseLayout title="Kanji usage frequency">
   <Box slot="header">
-    <Heading
-      level={1}
-      class="uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-sky-600"
-    >
-      Kanji usage frequency
-    </Heading>
-    <p class="mb-2 text-xl font-light">
+    <PageTitle>Kanji usage frequency</PageTitle>
+    <PageSubtitle>
       Datasets built from various Japanese language corpora
-    </p>
-    <p class="text-sm flex flex-wrap gap-x-3 gap-y-1">
+    </PageSubtitle>
+    <p class="flex flex-wrap gap-x-3 gap-y-1">
       <a
         href="https://github.com/scriptin/kanji-frequency/tree/master/data"
         class="font-bold"
@@ -37,7 +34,7 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
         Download
       </a>
       <a href="https://github.com/scriptin/kanji-frequency">GitHub</a>
-      <a href="/kanji-frequency/methods">Methods</a>
+      <a href="/kanji-frequency/about">About</a>
     </p>
   </Box>
   <div slot="content" class="flex flex-col gap-4">
@@ -118,20 +115,22 @@ const newsColor = 'rgb(21 128 61)'; // text-green-700
           },
         }}
       />
-      <p class="mb-2">
-        This diagram shows how many of the first most frequent kanji one needs
-        to know in order to be able to read a given fraction of each corpus.
-      </p>
-      <p class="mb-2">
-        For example, if a person knows the first 100 most frequent kanji from
-        the "news" dataset (green line), they are albe to read ~45% of kanji in
-        news articles. Knowing 300 most frequenct kanji will ensure ~72% of
-        comprehension. Knowing 1000 results in ~96% understanding.
-      </p>
-      <p>
-        See
-        <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf's law</a>
-      </p>
+      <div class="markdown">
+        <p>
+          This diagram shows how many of the first most frequent kanji one needs
+          to know in order to be able to read a given fraction of each corpus.
+        </p>
+        <p>
+          For example, if a person knows the first 100 most frequent kanji from
+          the "news" dataset (green line), they are albe to read ~45% of kanji
+          in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
+          comprehension. Knowing 1000 results in ~96% understanding.
+        </p>
+        <p>
+          See
+          <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf's law</a>
+        </p>
+      </div>
     </Box>
   </div>
 </BaseLayout>
