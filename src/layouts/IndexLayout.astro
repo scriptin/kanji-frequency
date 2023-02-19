@@ -9,6 +9,7 @@ import PageSubtitle from '@components/PageSubtitle.astro';
 import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
 import DownloadLink from '@components/DownloadLink.astro';
+import Navigation from '@components/Navigation.astro';
 
 import { datasets } from '../datasets';
 
@@ -27,13 +28,13 @@ cards.sort((a, b) => a.data.order - b.data.order);
   <Box slot="header">
     <PageTitle>{title}</PageTitle>
     <PageSubtitle>{subtitle}</PageSubtitle>
-    <nav class="flex flex-wrap gap-x-3 gap-y-1">
+    <Navigation>
       <DownloadLink />
       <a href="https://github.com/scriptin/kanji-frequency" target="_blank">
         GitHub
       </a>
       <a href="#about">About</a>
-    </nav>
+    </Navigation>
   </Box>
   <div slot="content" class="flex flex-col gap-4">
     <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">

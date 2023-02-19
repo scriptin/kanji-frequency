@@ -8,6 +8,7 @@ import PageSubtitle from '@components/PageSubtitle.astro';
 import Heading from '@components/Heading.astro';
 import DownloadLink, { DOWNLOAD_URL } from '@components/DownloadLink.astro';
 import Table from '@components/Table.astro';
+import Navigation from '@components/Navigation.astro';
 
 import { datasets } from 'src/datasets';
 import type { DatasetKey } from 'src/datasets';
@@ -28,15 +29,12 @@ const tableClass = 'mt-2 mb-4';
 
 <BaseLayout title={`${title} - Kanji usage frequency`}>
   <Box slot="header">
-    <PageTitle>
-      {title}
-    </PageTitle>
-    <PageSubtitle>
-      {subtitle}
-    </PageSubtitle>
-    <nav>
+    <PageTitle>{title}</PageTitle>
+    <PageSubtitle>{subtitle}</PageSubtitle>
+    <Navigation>
       <a href="/kanji-frequency/">&larr; Home</a>
-    </nav>
+      <a href="#about-start">About</a>
+    </Navigation>
   </Box>
   <Box inverted slot="content">
     {
@@ -103,6 +101,7 @@ const tableClass = 'mt-2 mb-4';
         </>
       )
     }
+    {dataset && <hr id="about-start" class="mt-6 mb-4" />}
     <article class="markdown">
       <slot />
     </article>
