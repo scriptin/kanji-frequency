@@ -71,7 +71,24 @@ const tableClass = 'mt-2 mb-4';
             type="characters"
             data={dataset.characters}
             nRows={SAMPLE_ROWS}
-            columns={['rank', 'code_point_hex', 'char', 'char_count']}
+            columns={[
+              {
+                name: 'rank',
+                type: 'integer',
+                comment: 'Rank, repeats if char_count is equal',
+              },
+              {
+                name: 'code_point_hex',
+                type: 'string',
+                comment: 'Unicode code point of a kanji character',
+              },
+              { name: 'char', type: 'string', comment: 'Kanji character' },
+              {
+                name: 'char_count',
+                type: 'integer',
+                comment: 'How many times this kanji was encountered?',
+              },
+            ]}
             class={tableClass}
           />
           <Heading level={2}>
@@ -87,7 +104,24 @@ const tableClass = 'mt-2 mb-4';
             type="documents"
             data={dataset.documents}
             nRows={SAMPLE_ROWS}
-            columns={['rank', 'code_point_hex', 'char', 'doc_count']}
+            columns={[
+              {
+                name: 'rank',
+                type: 'integer',
+                comment: 'Rank, repeats if doc_count is equal',
+              },
+              {
+                name: 'code_point_hex',
+                type: 'hexadecimal integer',
+                comment: 'Unicode code point of a kanji character',
+              },
+              { name: 'char', type: 'string', comment: 'Kanji character' },
+              {
+                name: 'doc_count',
+                type: 'integer',
+                comment: 'In how many docs/texts this kanji was encountered?',
+              },
+            ]}
             class={tableClass}
           />
         </>
@@ -106,7 +140,20 @@ const tableClass = 'mt-2 mb-4';
             type="dates"
             data={dataset.dates}
             nRows={SAMPLE_ROWS}
-            columns={['year', 'month', 'wikinews']}
+            columns={[
+              { name: 'year', type: 'integer', comment: 'Year of publishing' },
+              {
+                name: 'month',
+                type: 'integer',
+                comment:
+                  'Month of publishing, number with leading zero (01=Jan, 02=Feb, ..., 12=Dec)',
+              },
+              {
+                name: 'wikinews',
+                type: 'integer',
+                comment: 'How many articles from Wikinews on this year/month?',
+              },
+            ]}
             class={tableClass}
           />
         </>

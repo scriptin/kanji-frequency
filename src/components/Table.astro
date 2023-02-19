@@ -22,9 +22,15 @@ export interface DateProps {
 
 export type CharOrDocProps = CharProps | DocProps | DateProps;
 
+export interface Column {
+  name: string;
+  type: string;
+  comment?: string;
+}
+
 export type Props = CharOrDocProps & {
   nRows: number;
-  columns: string[];
+  columns: Column[];
   class?: string;
 };
 
@@ -43,7 +49,27 @@ const rows = data.slice(0, nRows);
     <tr>
       {
         columns.map((c) => (
-          <td class="font-bold px-3 py-1 border-b border-b-sky-600">{c}</td>
+          <td class="font-bold px-3 py-1 border-b border-b-sky-600">
+            {c.name}
+          </td>
+        ))
+      }
+    </tr>
+    <tr>
+      {
+        columns.map((c) => (
+          <td class="text-xs text-sky-300 align-text-top uppercase px-3 py-1">
+            {c.type}
+          </td>
+        ))
+      }
+    </tr>
+    <tr>
+      {
+        columns.map((c) => (
+          <td class="text-xs text-sky-300 align-text-top px-3 py-1 border-b border-b-sky-600">
+            {c.comment ?? ' '}
+          </td>
         ))
       }
     </tr>
@@ -56,7 +82,7 @@ const rows = data.slice(0, nRows);
             <td class="px-3 py-1">
               {
                 row[
-                  c as keyof (
+                  c.name as keyof (
                     | CharactersTableRow
                     | DocumentsTableRow
                     | DatesTableRow
