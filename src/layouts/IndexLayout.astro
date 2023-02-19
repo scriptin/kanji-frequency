@@ -8,6 +8,7 @@ import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
 import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
+import DownloadLink from '@components/DownloadLink.astro';
 
 import aozoraCharacters from '@data/aozora_characters.csv';
 import aozoraDocuments from '@data/aozora_documents.csv';
@@ -47,13 +48,7 @@ cards.sort((a, b) => a.data.order - b.data.order);
     <PageTitle>{title}</PageTitle>
     <PageSubtitle>{subtitle}</PageSubtitle>
     <nav class="flex flex-wrap gap-x-3 gap-y-1">
-      <a
-        href="https://github.com/scriptin/kanji-frequency/tree/master/data"
-        class="font-bold"
-        target="_blank"
-      >
-        Download
-      </a>
+      <DownloadLink />
       <a href="https://github.com/scriptin/kanji-frequency" target="_blank">
         GitHub
       </a>

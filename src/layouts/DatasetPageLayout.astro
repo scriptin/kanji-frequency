@@ -5,6 +5,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Box from '@components/Box.astro';
 import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
+import DownloadLink from '@components/DownloadLink.astro';
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -27,6 +28,9 @@ const { title, subtitle } = Astro.props.frontmatter;
     </nav>
   </Box>
   <Box inverted slot="content">
+    <p class="mb-4">
+      <DownloadLink />
+    </p>
     <article class="markdown">
       <slot />
     </article>
