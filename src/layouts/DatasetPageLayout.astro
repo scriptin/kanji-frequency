@@ -5,8 +5,11 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Box from '@components/Box.astro';
 import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
+import Heading from '@components/Heading.astro';
 import DownloadLink from '@components/DownloadLink.astro';
+import Table from '@components/Table.astro';
 
+import { datasets } from 'src/datasets';
 import type { DatasetKey } from 'src/datasets';
 
 type Props = MarkdownLayoutProps<{
@@ -17,6 +20,9 @@ type Props = MarkdownLayoutProps<{
 }>;
 
 const { title, subtitle, datasetKey, downloadUrl } = Astro.props.frontmatter;
+
+const dataset = datasetKey ? datasets[datasetKey] : null;
+const SAMPLE_ROWS = 6;
 ---
 
 <BaseLayout title={`${title} - Kanji usage frequency`}>
@@ -37,6 +43,44 @@ const { title, subtitle, datasetKey, downloadUrl } = Astro.props.frontmatter;
         <p class="mb-4">
           <DownloadLink url={downloadUrl} />
         </p>
+      )
+    }
+    {
+      dataset && (
+        <>
+          <Heading level={2}>
+            Sample of
+            <a
+              href={`https://github.com/scriptin/kanji-frequency/tree/master/data/${datasetKey}_characters.csv`}
+              target="_blank"
+            >
+              {datasetKey}_characters.csv
+            </a>
+          </Heading>
+          <Table
+            type="characters"
+            data={dataset.characters}
+            nRows={SAMPLE_ROWS}
+            columns={['rank', 'code_point_hex', 'char', 'char_count']}
+            class="mt-2 mb-4"
+          />
+          <Heading level={2}>
+            Sample of
+            <a
+              href={`https://github.com/scriptin/kanji-frequency/tree/master/data/${datasetKey}_documents.csv`}
+              target="_blank"
+            >
+              {datasetKey}_documents.csv
+            </a>
+          </Heading>
+          <Table
+            type="documents"
+            data={dataset.documents}
+            nRows={SAMPLE_ROWS}
+            columns={['rank', 'code_point_hex', 'char', 'doc_count']}
+            class="mt-2 mb-4"
+          />
+        </>
       )
     }
     <article class="markdown">

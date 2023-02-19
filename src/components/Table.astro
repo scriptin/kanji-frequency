@@ -1,0 +1,55 @@
+---
+import type { CharactersTableRow, DocumentsTableRow } from 'src/datasets';
+
+export interface CharProps {
+  type: 'characters';
+  data: CharactersTableRow[];
+}
+
+export interface DocProps {
+  type: 'documents';
+  data: DocumentsTableRow[];
+}
+
+export type CharOrDocProps = CharProps | DocProps;
+
+export type Props = CharOrDocProps & {
+  nRows: number;
+  columns: string[];
+  class?: string;
+};
+
+const { nRows, data, columns, class: className } = Astro.props;
+
+const rows = data.slice(0, nRows);
+---
+
+<table
+  class:list={[
+    className,
+    'text-sm text-sky-100 bg-gradient-to-br from-sky-700 to-sky-800 rounded-lg',
+  ]}
+>
+  <thead>
+    <tr>
+      {
+        columns.map((c) => (
+          <td class="font-bold px-3 py-1 border-b border-b-sky-600">{c}</td>
+        ))
+      }
+    </tr>
+  </thead>
+  <tbody>
+    {
+      rows.map((row) => (
+        <tr>
+          {columns.map((c) => (
+            <td class="px-3 py-1">
+              {row[c as keyof (CharactersTableRow | DocumentsTableRow)]}
+            </td>
+          ))}
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
