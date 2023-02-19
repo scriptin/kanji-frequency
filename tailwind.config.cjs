@@ -8,6 +8,9 @@ module.exports = {
     require('@tailwindcss/container-queries'),
     function ({ addBase, theme }) {
       addBase({
+        html: {
+          scrollBehavior: 'smooth',
+        },
         // Basic links
         a: {
           textDecoration: 'underline',
