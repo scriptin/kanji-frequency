@@ -12,6 +12,7 @@ import Navigation from '@components/Navigation.astro';
 
 import { datasets } from 'src/datasets';
 import type { DatasetKey } from 'src/datasets';
+import Stats from '@components/Stats.astro';
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -31,6 +32,16 @@ const tableClass = 'mt-2 mb-4';
   <Box slot="header">
     <PageTitle>{title}</PageTitle>
     <PageSubtitle>{subtitle}</PageSubtitle>
+    {
+      dataset && (
+        <Stats
+          class="mb-2"
+          textsCount={+dataset.documents[0].doc_count}
+          totalKanjiCount={+dataset.characters[0].char_count}
+          uniqueKanjiCount={dataset.characters.length - 2}
+        />
+      )
+    }
     <Navigation>
       <a href="/kanji-frequency/">&larr; Home</a>
       <a href="#about-start">About</a>

@@ -63,6 +63,7 @@ cards.sort((a, b) => a.data.order - b.data.order);
                 </div>
                 <Stats
                   class="mt-2"
+                  inverted
                   textsCount={+documents[0].doc_count}
                   totalKanjiCount={+characters[0].char_count}
                   uniqueKanjiCount={characters.length - 2}
