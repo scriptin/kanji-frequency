@@ -13,9 +13,10 @@ type Props = MarkdownLayoutProps<{
   title: string;
   subtitle: string;
   datasetKey?: DatasetKey;
+  downloadUrl?: string;
 }>;
 
-const { title, subtitle } = Astro.props.frontmatter;
+const { title, subtitle, datasetKey, downloadUrl } = Astro.props.frontmatter;
 ---
 
 <BaseLayout title={`${title} - Kanji usage frequency`}>
@@ -31,9 +32,13 @@ const { title, subtitle } = Astro.props.frontmatter;
     </nav>
   </Box>
   <Box inverted slot="content">
-    <p class="mb-4">
-      <DownloadLink />
-    </p>
+    {
+      (datasetKey || downloadUrl) && (
+        <p class="mb-4">
+          <DownloadLink url={downloadUrl} />
+        </p>
+      )
+    }
     <article class="markdown">
       <slot />
     </article>

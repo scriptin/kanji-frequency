@@ -1,6 +1,12 @@
 ---
-export const DOWNLOAD_URL =
+const DOWNLOAD_URL =
   'https://github.com/scriptin/kanji-frequency/tree/master/data';
+
+export interface Props {
+  url?: string;
+}
+
+const { url } = Astro.props;
 ---
 
-<a href={DOWNLOAD_URL} class="font-bold" target="_blank"> Download</a>
+<a href={url ?? DOWNLOAD_URL} class="font-bold" target="_blank"> Download</a>

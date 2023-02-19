@@ -1,0 +1,15 @@
+---
+export interface Props {
+  message: string;
+}
+
+const { message } = Astro.props;
+---
+
+<p
+  class="text-red-500 px-6 py-3 bg-gradient-to-br from-red-100 to-red-200 rounded-lg"
+>
+  <strong>WARNING!</strong>
+  {message}
+  {/* Using a slot doesn't work */}
+</p>
