@@ -10,27 +10,7 @@ import Card from '@components/Card.astro';
 import Stats from '@components/Stats.astro';
 import DownloadLink from '@components/DownloadLink.astro';
 
-import aozoraCharacters from '@data/aozora_characters.csv';
-import aozoraDocuments from '@data/aozora_documents.csv';
-import wikipediaCharacters from '@data/wikipedia_characters.csv';
-import wikipediaDocuments from '@data/wikipedia_documents.csv';
-import newsCharacters from '@data/news_characters.csv';
-import newsDocuments from '@data/news_documents.csv';
-
-const csv: any = {
-  aozora: {
-    characters: aozoraCharacters,
-    documents: aozoraDocuments,
-  },
-  wikipedia: {
-    characters: wikipediaCharacters,
-    documents: wikipediaDocuments,
-  },
-  news: {
-    characters: newsCharacters,
-    documents: newsDocuments,
-  },
-};
+import { datasets } from '../datasets';
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -61,7 +41,7 @@ cards.sort((a, b) => a.data.order - b.data.order);
         cards.map(async (card) => {
           const { Content } = await card.render();
 
-          if (!card.data.csvPrefix) {
+          if (!card.data.datasetKey) {
             return (
               <li>
                 <Card href={card.data.url} title={card.data.title}>
@@ -73,7 +53,7 @@ cards.sort((a, b) => a.data.order - b.data.order);
             );
           }
 
-          const { characters, documents } = csv[card.data.csvPrefix];
+          const { characters, documents } = datasets[card.data.datasetKey];
           return (
             <li>
               <Card href={card.data.url} title={card.data.title}>
@@ -82,8 +62,8 @@ cards.sort((a, b) => a.data.order - b.data.order);
                 </div>
                 <Stats
                   class="mt-2"
-                  textsCount={documents[0].doc_count}
-                  totalKanjiCount={characters[0].char_count}
+                  textsCount={+documents[0].doc_count}
+                  totalKanjiCount={+characters[0].char_count}
                   uniqueKanjiCount={characters.length - 2}
                 />
               </Card>
