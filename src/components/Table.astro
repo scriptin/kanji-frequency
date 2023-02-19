@@ -1,5 +1,9 @@
 ---
-import type { CharactersTableRow, DocumentsTableRow } from 'src/datasets';
+import type {
+  CharactersTableRow,
+  DatesTableRow,
+  DocumentsTableRow,
+} from 'src/datasets';
 
 export interface CharProps {
   type: 'characters';
@@ -11,7 +15,12 @@ export interface DocProps {
   data: DocumentsTableRow[];
 }
 
-export type CharOrDocProps = CharProps | DocProps;
+export interface DateProps {
+  type: 'dates';
+  data: DatesTableRow[];
+}
+
+export type CharOrDocProps = CharProps | DocProps | DateProps;
 
 export type Props = CharOrDocProps & {
   nRows: number;
@@ -45,7 +54,15 @@ const rows = data.slice(0, nRows);
         <tr>
           {columns.map((c) => (
             <td class="px-3 py-1">
-              {row[c as keyof (CharactersTableRow | DocumentsTableRow)]}
+              {
+                row[
+                  c as keyof (
+                    | CharactersTableRow
+                    | DocumentsTableRow
+                    | DatesTableRow
+                  )
+                ]
+              }
             </td>
           ))}
         </tr>

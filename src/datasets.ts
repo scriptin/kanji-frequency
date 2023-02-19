@@ -4,6 +4,7 @@ import wikipediaCharacters from '@data/wikipedia_characters.csv';
 import wikipediaDocuments from '@data/wikipedia_documents.csv';
 import newsCharacters from '@data/news_characters.csv';
 import newsDocuments from '@data/news_documents.csv';
+import newsDates from '@data/news_dates.csv';
 
 export type DatasetKey = 'aozora' | 'wikipedia' | 'news';
 
@@ -21,9 +22,16 @@ export interface DocumentsTableRow {
   doc_count: string;
 }
 
+export interface DatesTableRow {
+  year: string;
+  month: string;
+  wikinews: string;
+}
+
 export interface Dataset {
   characters: CharactersTableRow[];
   documents: DocumentsTableRow[];
+  dates?: DatesTableRow[];
 }
 
 export const datasets: Record<DatasetKey, Dataset> = {
@@ -38,5 +46,6 @@ export const datasets: Record<DatasetKey, Dataset> = {
   news: {
     characters: newsCharacters,
     documents: newsDocuments,
+    dates: newsDates,
   },
 };

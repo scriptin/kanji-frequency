@@ -6,7 +6,7 @@ import Box from '@components/Box.astro';
 import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
 import Heading from '@components/Heading.astro';
-import DownloadLink from '@components/DownloadLink.astro';
+import DownloadLink, { DOWNLOAD_URL } from '@components/DownloadLink.astro';
 import Table from '@components/Table.astro';
 
 import { datasets } from 'src/datasets';
@@ -23,6 +23,7 @@ const { title, subtitle, datasetKey, downloadUrl } = Astro.props.frontmatter;
 
 const dataset = datasetKey ? datasets[datasetKey] : null;
 const SAMPLE_ROWS = 6;
+const tableClass = 'mt-2 mb-4';
 ---
 
 <BaseLayout title={`${title} - Kanji usage frequency`}>
@@ -51,7 +52,7 @@ const SAMPLE_ROWS = 6;
           <Heading level={2}>
             Sample of
             <a
-              href={`https://github.com/scriptin/kanji-frequency/tree/master/data/${datasetKey}_characters.csv`}
+              href={`${DOWNLOAD_URL}/${datasetKey}_characters.csv`}
               target="_blank"
             >
               {datasetKey}_characters.csv
@@ -62,12 +63,12 @@ const SAMPLE_ROWS = 6;
             data={dataset.characters}
             nRows={SAMPLE_ROWS}
             columns={['rank', 'code_point_hex', 'char', 'char_count']}
-            class="mt-2 mb-4"
+            class={tableClass}
           />
           <Heading level={2}>
             Sample of
             <a
-              href={`https://github.com/scriptin/kanji-frequency/tree/master/data/${datasetKey}_documents.csv`}
+              href={`${DOWNLOAD_URL}/${datasetKey}_documents.csv`}
               target="_blank"
             >
               {datasetKey}_documents.csv
@@ -78,7 +79,26 @@ const SAMPLE_ROWS = 6;
             data={dataset.documents}
             nRows={SAMPLE_ROWS}
             columns={['rank', 'code_point_hex', 'char', 'doc_count']}
-            class="mt-2 mb-4"
+            class={tableClass}
+          />
+        </>
+      )
+    }
+    {
+      dataset && dataset.dates && (
+        <>
+          <Heading level={2}>
+            Sample of
+            <a href={`${DOWNLOAD_URL}/${datasetKey}_dates.csv`} target="_blank">
+              {datasetKey}_dates.csv
+            </a>
+          </Heading>
+          <Table
+            type="dates"
+            data={dataset.dates}
+            nRows={SAMPLE_ROWS}
+            columns={['year', 'month', 'wikinews']}
+            class={tableClass}
           />
         </>
       )
