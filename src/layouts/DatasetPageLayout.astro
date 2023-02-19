@@ -7,9 +7,12 @@ import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
 import DownloadLink from '@components/DownloadLink.astro';
 
+import type { DatasetKey } from 'src/datasets';
+
 type Props = MarkdownLayoutProps<{
   title: string;
   subtitle: string;
+  datasetKey?: DatasetKey;
 }>;
 
 const { title, subtitle } = Astro.props.frontmatter;

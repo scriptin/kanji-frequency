@@ -2,6 +2,7 @@
 layout: '@layouts/DatasetPageLayout.astro'
 title: Wikipedia
 subtitle: Articles from Japanese Wikipedia
+datasetKey: wikipedia
 ---
 
 ## Data source

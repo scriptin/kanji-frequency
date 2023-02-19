@@ -2,6 +2,7 @@
 layout: '@layouts/DatasetPageLayout.astro'
 title: Aozora
 subtitle: Books from Aozora Bunko
+datasetKey: aozora
 ---
 
 ## Data source

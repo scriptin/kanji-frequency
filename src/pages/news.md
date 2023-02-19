@@ -2,6 +2,7 @@
 layout: '@layouts/DatasetPageLayout.astro'
 title: News
 subtitle: News articles from Japanese Wikinews
+datasetKey: news
 ---
 
 ## Data source
