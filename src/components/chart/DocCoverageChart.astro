@@ -1,0 +1,108 @@
+---
+import ChartBase from './ChartBase.astro';
+import type { Props as ChartBaseProps } from './ChartBase.astro';
+
+interface DataRow {
+  doc_count: number;
+}
+
+export interface Props extends Omit<ChartBaseProps, 'ranges'> {
+  takeFirst: number;
+  datasets: {
+    [key: string]: {
+      data: DataRow[];
+      color: string;
+    };
+  };
+}
+
+const {
+  // own
+  datasets,
+  takeFirst,
+  // inherited
+  width,
+  height,
+  margin,
+  ...props
+} = Astro.props;
+
+function coverage(data: DataRow[], takeFirst: number): number[] {
+  const total = +data[0].doc_count;
+  return data.slice(1, 1 + takeFirst).map(({ doc_count }) => {
+    return doc_count / total;
+  });
+}
+
+function coverageLine(
+  coverage: number[],
+  width: number,
+  height: number,
+  margin: number,
+): string {
+  const fromX = margin;
+  const toX = width - margin;
+  const rangeX = Math.abs(toX - fromX);
+  const stepX = rangeX / coverage.length;
+
+  const fromY = margin;
+  const toY = height - margin;
+  const rangeY = Math.abs(toY - fromY);
+
+  return coverage
+    .map((cov, index) => {
+      const op = index === 0 ? 'M' : 'L';
+      const x = fromX + (index + 1) * stepX;
+      const y = toY - rangeY * cov;
+      return `${op} ${x} ${y}`;
+    })
+    .join(' ');
+}
+
+// Reversed to match the other chart
+const datasetKeyLegens = Object.keys(datasets).reverse();
+---
+
+<ChartBase
+  width={width}
+  height={height}
+  margin={margin}
+  ranges={{
+    x: [0, takeFirst],
+    y: [0, 1],
+  }}
+  {...props}
+>
+  <Fragment slot="chart">
+    {
+      Object.keys(datasets).map((datasetKey) => (
+        <path
+          d={coverageLine(
+            coverage(datasets[datasetKey].data, takeFirst),
+            width,
+            height,
+            margin,
+          )}
+          stroke={datasets[datasetKey].color}
+          stroke-width={1.5}
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-opacity={1}
+          fill="none"
+        />
+      ))
+    }
+  </Fragment>
+  <Fragment slot="legend">
+    {
+      datasetKeyLegens.map((datasetKey) => (
+        <div class="flex gap-1">
+          <div class="font-bold" style={{ color: datasets[datasetKey].color }}>
+            &mdash;
+          </div>
+          <div>{datasetKey}</div>
+        </div>
+      ))
+    }
+  </Fragment>
+</ChartBase>

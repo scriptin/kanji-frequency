@@ -51,6 +51,8 @@ in this corpus this particular kanji appears?"
 
 ## Coverage of corpora
 
+### Character coverage
+
 import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro';
 
 <CharCoverageChartI18n
@@ -62,14 +64,35 @@ import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro
 />
 
 This diagram shows how many of the first most frequent kanji one needs
-to know in order to be able to read a given fraction of each corpus.
+to know in order to be able to recognize a given fraction of kanji characters
+in each corpus.
 
 For example, if a person knows the first 100 most frequent kanji from
-the "news" dataset (green line), they are albe to recognize ~45% of kanji
+the "news" dataset (green line), they are able to recognize ~45% of kanji
 in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
 recognition. Knowing 1000 results in ~96% recognition.
 
 See [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)
+
+### Document coverage
+
+import DocCoverageChartI18n from '@components/chart/DocCoverageChartI18n.astro';
+
+<DocCoverageChartI18n
+  class="mb-4"
+  axisLabels={{
+    x: 'Nth most frequent character',
+    y: 'Coverage of corpus, % of all docs/texts',
+  }}
+/>
+
+This diagram shows how many of the documents/texts in each dataset contain
+every Nth most frequent character. Character frequency in this case is defined
+as the number of documents/texts which contain this character.
+
+For example, the 1st most popular kanji in the "news" dataset (green line)
+is present in almost 100% of all documents, while the 100th most popular
+appreas in ~26% of documents.
 
 ## Want to contribute?
 

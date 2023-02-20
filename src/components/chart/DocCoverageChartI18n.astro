@@ -1,0 +1,56 @@
+---
+/**
+ * @description A thin wrapper around {@link CharCoverageChart}
+ * which exposes only text labels for i18n purposes.
+ */
+
+import DocCoverageChart, {
+  Props as ChartProps,
+} from './DocCoverageChart.astro';
+
+import aozoraDocuments from '@data/aozora_documents.csv';
+import wikipediaDocuments from '@data/wikipedia_documents.csv';
+import newsDocuments from '@data/news_documents.csv';
+
+export interface Props extends Pick<ChartProps, 'axisLabels' | 'class'> {}
+
+const { axisLabels, class: className } = Astro.props;
+
+const takeFirst = 100;
+---
+
+<DocCoverageChart
+  class={className}
+  width={400}
+  height={250}
+  margin={30}
+  gridLines={{
+    everyX: 5,
+    everyY: 0.1,
+    dashArray: '3,2',
+  }}
+  ticks={{
+    size: 3,
+    everyX: 5,
+    everyY: 0.1,
+    needsLabelAtX: (idx) => idx % 2 === 0,
+    needsLabelAtY: (idx) => idx % 2 === 0,
+    labelY: (yVal: number) => Math.round(yVal * 100) + '%',
+  }}
+  axisLabels={axisLabels}
+  takeFirst={takeFirst}
+  datasets={{
+    aozora: {
+      data: aozoraDocuments,
+      color: 'rgb(3 105 161)', // text-sky-700
+    },
+    wikipedia: {
+      data: wikipediaDocuments,
+      color: 'rgb(185 28 28)', // text-red-700
+    },
+    news: {
+      data: newsDocuments,
+      color: 'rgb(21 128 61)', // text-green-700
+    },
+  }}
+/>
