@@ -1,8 +1,4 @@
 ---
-interface DataRow {
-  char_count: number;
-}
-
 export interface Props {
   class?: string;
   width: number; // px
@@ -10,19 +6,23 @@ export interface Props {
   margin: number; // px
   ranges: {
     x: [number, number]; // domain units
-    y: [number, number];
+    y: [number, number]; // domain units
   };
   gridLines: {
     everyX: number; // domain units
-    everyY: number;
-    dashArray?: string;
+    everyY: number; // domain units
+    dashArray?: string; // px
   };
   ticks: {
     size: number; // px
-    labelX?: (val: number) => string;
-    labelY?: (val: number) => string;
+    everyX: number; // domain units
+    everyY: number; // domain units
+    needsLabelAtX: (idx: number) => boolean; //
+    needsLabelAtY: (idx: number) => boolean;
+    labelX?: (val: number) => string; // val - domain units
+    labelY?: (val: number) => string; // val - domain units
   };
-  labels: {
+  axisLabels: {
     x: string;
     y: string;
   };
@@ -37,7 +37,7 @@ const {
   ranges,
   gridLines,
   ticks,
-  labels,
+  axisLabels,
   fontSize = 8,
 } = Astro.props;
 
@@ -68,12 +68,32 @@ export function range(start: number, end: number, step: number): number[] {
     style="width: 100%; height: auto; height: intrinsic;"
   >
     {
+      // grid lines - X/vertical
       range(...ranges.x, gridLines.everyX).map((xVal) => {
         const fromX = margin;
         const toX = width - margin;
         const rangeX = Math.abs(toX - fromX);
         const x = fromX + rangeX * (xVal / (ranges.x[1] - ranges.x[0]));
-        const bgLinePath = `M ${x} ${height - margin} L ${x} ${margin}`;
+        const gridLinePath = `M ${x} ${height - margin} L ${x} ${margin}`;
+        return (
+          <path
+            d={gridLinePath}
+            stroke={axisColor}
+            stroke-width={bgScaleLineWidth}
+            stroke-opacity={bgScaleLineOpacity}
+            stroke-dasharray={gridLines.dashArray}
+            fill="none"
+          />
+        );
+      })
+    }
+    {
+      // ticks - X/vertical
+      range(...ranges.x, ticks.everyX).map((xVal, idx) => {
+        const fromX = margin;
+        const toX = width - margin;
+        const rangeX = Math.abs(toX - fromX);
+        const x = fromX + rangeX * (xVal / (ranges.x[1] - ranges.x[0]));
         const tickPath = `M ${x} ${height - margin} L ${x} ${
           height - margin + ticks.size
         }`;
@@ -81,52 +101,58 @@ export function range(start: number, end: number, step: number): number[] {
         return (
           <>
             <path
-              d={bgLinePath}
-              stroke={axisColor}
-              stroke-width={bgScaleLineWidth}
-              stroke-opacity={bgScaleLineOpacity}
-              stroke-dasharray={gridLines.dashArray}
-              fill="none"
-            />
-            <path
               d={tickPath}
               stroke={axisColor}
               stroke-width={1}
               stroke-opacity={1}
               fill="none"
             />
-            <text
-              x={x}
-              y={height - margin + fontSize + ticks.size}
-              font-size={fontSize}
-              font-color={axisColor}
-              text-anchor="middle"
-            >
-              {label}
-            </text>
+            {ticks.needsLabelAtX(idx) && (
+              <text
+                x={x}
+                y={height - margin + fontSize + ticks.size * 1.2}
+                font-size={fontSize}
+                font-color={axisColor}
+                text-anchor="middle"
+              >
+                {label}
+              </text>
+            )}
           </>
         );
       })
     }
     {
+      // grid lines - Y/horizontal
       range(...ranges.y, gridLines.everyY).map((yVal) => {
         const fromY = height - margin;
         const toY = margin;
         const rangeY = Math.abs(toY - fromY);
         const y = fromY - rangeY * (yVal / (ranges.y[1] - ranges.y[0]));
-        const bgLinePath = `M ${margin} ${y} L ${width - margin} ${y}`;
+        const gridLinePath = `M ${margin} ${y} L ${width - margin} ${y}`;
+        return (
+          <path
+            d={gridLinePath}
+            stroke={axisColor}
+            stroke-width={bgScaleLineWidth}
+            stroke-opacity={bgScaleLineOpacity}
+            stroke-dasharray={gridLines.dashArray}
+            fill="none"
+          />
+        );
+      })
+    }
+    {
+      // ticks - Y/horizontal
+      range(...ranges.y, ticks.everyY).map((yVal, idx) => {
+        const fromY = height - margin;
+        const toY = margin;
+        const rangeY = Math.abs(toY - fromY);
+        const y = fromY - rangeY * (yVal / (ranges.y[1] - ranges.y[0]));
         const tickPath = `M ${margin} ${y} L ${margin - ticks.size} ${y}`;
         const label = ticks.labelY?.(yVal) ?? yVal;
         return (
           <>
-            <path
-              d={bgLinePath}
-              stroke={axisColor}
-              stroke-width={bgScaleLineWidth}
-              stroke-opacity={bgScaleLineOpacity}
-              stroke-dasharray={gridLines.dashArray}
-              fill="none"
-            />
             <path
               d={tickPath}
               stroke={axisColor}
@@ -134,15 +160,17 @@ export function range(start: number, end: number, step: number): number[] {
               stroke-opacity={1}
               fill="none"
             />
-            <text
-              x={margin - ticks.size}
-              y={y + fontSize * 0.4}
-              font-size={fontSize}
-              font-color={axisColor}
-              text-anchor="end"
-            >
-              {label}
-            </text>
+            {ticks.needsLabelAtY(idx) && (
+              <text
+                x={margin - ticks.size * 1.6}
+                y={y + fontSize * 0.4}
+                font-size={fontSize}
+                font-color={axisColor}
+                text-anchor="end"
+              >
+                {label}
+              </text>
+            )}
           </>
         );
       })
@@ -153,7 +181,7 @@ export function range(start: number, end: number, step: number): number[] {
       x={margin}
       y={margin - fontSize * 0.5}
     >
-      {labels.y}
+      {axisLabels.y}
     </text>
     <text
       font-size={fontSize}
@@ -162,7 +190,7 @@ export function range(start: number, end: number, step: number): number[] {
       y={height - margin + ticks.size + fontSize * 2.5}
       text-anchor="middle"
     >
-      {labels.x}
+      {axisLabels.x}
     </text>
     <path d={xAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>
     <path d={yAxisPath} stroke={axisColor} stroke-width={1} fill="none"></path>

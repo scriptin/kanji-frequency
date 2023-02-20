@@ -10,9 +10,9 @@ import aozoraCharacters from '@data/aozora_characters.csv';
 import wikipediaCharacters from '@data/wikipedia_characters.csv';
 import newsCharacters from '@data/news_characters.csv';
 
-export interface Props extends Pick<ChartProps, 'labels' | 'class'> {}
+export interface Props extends Pick<ChartProps, 'axisLabels' | 'class'> {}
 
-const { labels, class: className } = Astro.props;
+const { axisLabels, class: className } = Astro.props;
 ---
 
 <CoverageChart
@@ -23,12 +23,17 @@ const { labels, class: className } = Astro.props;
   gridLines={{
     everyX: 100,
     everyY: 0.1,
+    dashArray: '3,2',
   }}
   ticks={{
     size: 3,
+    everyX: 100,
+    everyY: 0.1,
+    needsLabelAtX: (idx) => idx % 2 === 0,
+    needsLabelAtY: (idx) => idx % 2 === 0,
     labelY: (yVal: number) => Math.round(yVal * 100) + '%',
   }}
-  labels={labels}
+  axisLabels={axisLabels}
   takeFirst={1000}
   datasets={{
     aozora: {
