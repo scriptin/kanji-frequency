@@ -14,18 +14,18 @@ module.exports = {
         // Basic links
         a: {
           textDecoration: 'underline',
-          textDecorationColor: theme('textColor.sky[500]'),
-          textUnderlineOffset: theme('textUnderlineOffset[2]'),
+          textDecorationColor: theme('textColor.sky.500'),
+          textUnderlineOffset: theme('textUnderlineOffset.2'),
           '&:hover': {
             textDecoration: 'underline',
-            textDecorationColor: theme('textColor.sky[900]'),
+            textDecorationColor: theme('textColor.sky.900'),
           },
         },
         // Inverted links
         'a.link-inverted, .box-inverted a': {
-          textDecorationColor: theme('textColor.sky[300]'),
+          textDecorationColor: theme('textColor.sky.300'),
           '&:hover': {
-            textDecorationColor: theme('textColor.sky[100]'),
+            textDecorationColor: theme('textColor.sky.100'),
           },
         },
         // Plain links - no underline or other decorations
@@ -36,23 +36,23 @@ module.exports = {
           // Headings must match those in src/components/Heading.astro
           'h2, h3': {
             fontWeight: theme('fontWeight.black'),
-            marginBottom: theme('margin[1]'),
+            marginBottom: theme('margin.1'),
             '&:first-child': {
               marginTop: 0,
             },
           },
           h2: {
             fontSize: theme('fontSize.2xl'),
-            lineHeight: theme('fontSize.2xl.[1].lineHeight'),
-            marginTop: theme('margin[8]'),
+            lineHeight: theme('fontSize.2xl.1.lineHeight'),
+            marginTop: theme('margin.8.'),
           },
           h3: {
             fontSize: theme('fontSize.xl'),
-            lineHeight: theme('fontSize.xl[1].lineHeight'),
-            marginTop: theme('margin[4]'),
+            lineHeight: theme('fontSize.xl.1.lineHeight'),
+            marginTop: theme('margin.4'),
           },
           'p, blockquote, ul, ol': {
-            marginBottom: theme('margin[4]'),
+            marginBottom: theme('margin.4'),
             '&:last-child': {
               marginBottom: 0,
             },
@@ -66,22 +66,23 @@ module.exports = {
           'ul, ol': {
             listStylePosition: 'outside',
             li: {
-              marginLeft: theme('margin[8]'),
+              marginLeft: theme('margin.8'),
             },
           },
           blockquote: {
             fontStyle: 'italic',
-            borderLeft: `${theme('borderWidth[4]')} solid ${theme(
-              'borderColor.sky[200]',
+            borderLeft: `${theme('borderWidth.4')} solid ${theme(
+              'borderColor.sky.200',
             )}`,
-            paddingTop: theme('padding[1]'),
-            paddingBottom: theme('padding[1]'),
-            paddingLeft: theme('padding[4]'),
+            paddingTop: theme('padding.1'),
+            paddingBottom: theme('padding.1'),
+            paddingLeft: theme('padding.4'),
+            paddingRight: theme('padding.4'),
           },
         },
         '.box-inverted': {
           blockquote: {
-            borderLeftColor: theme('borderColor.sky[800]'),
+            borderLeftColor: theme('borderColor.sky.800'),
           },
         },
         [`@media (min-width: ${theme('screens.md')})`]: {
