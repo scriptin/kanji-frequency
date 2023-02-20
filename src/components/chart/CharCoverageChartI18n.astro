@@ -1,10 +1,12 @@
 ---
 /**
- * @description A thin wrapper around {@link CoverageChart}
+ * @description A thin wrapper around {@link CharCoverageChart}
  * which exposes only text labels for i18n purposes.
  */
 
-import CoverageChart, { Props as ChartProps } from './CoverageChart.astro';
+import CharCoverageChart, {
+  Props as ChartProps,
+} from './CharCoverageChart.astro';
 
 import aozoraCharacters from '@data/aozora_characters.csv';
 import wikipediaCharacters from '@data/wikipedia_characters.csv';
@@ -15,7 +17,7 @@ export interface Props extends Pick<ChartProps, 'axisLabels' | 'class'> {}
 const { axisLabels, class: className } = Astro.props;
 ---
 
-<CoverageChart
+<CharCoverageChart
   class={className}
   width={400}
   height={250}
