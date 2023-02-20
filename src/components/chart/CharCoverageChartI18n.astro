@@ -8,6 +8,8 @@ import CharCoverageChart, {
   Props as ChartProps,
 } from './CharCoverageChart.astro';
 
+import { AOZORA_COLOR, WIKIPEDIA_COLOR, NEWS_COLOR } from './colors';
+
 import aozoraCharacters from '@data/aozora_characters.csv';
 import wikipediaCharacters from '@data/wikipedia_characters.csv';
 import newsCharacters from '@data/news_characters.csv';
@@ -15,6 +17,8 @@ import newsCharacters from '@data/news_characters.csv';
 export interface Props extends Pick<ChartProps, 'axisLabels' | 'class'> {}
 
 const { axisLabels, class: className } = Astro.props;
+
+const takeFirst = 30;
 ---
 
 <CharCoverageChart
@@ -22,33 +26,37 @@ const { axisLabels, class: className } = Astro.props;
   width={400}
   height={250}
   margin={30}
+  ranges={{
+    x: [0, takeFirst],
+    y: [0, 0.04],
+  }}
   gridLines={{
-    everyX: 100,
-    everyY: 0.1,
+    everyX: 1,
+    everyY: 0.005,
     dashArray: '3,2',
   }}
   ticks={{
     size: 3,
-    everyX: 100,
-    everyY: 0.1,
-    needsLabelAtX: (idx) => idx % 2 === 0,
+    everyX: 5,
+    everyY: 0.005,
+    needsLabelAtX: () => true,
     needsLabelAtY: (idx) => idx % 2 === 0,
     labelY: (yVal: number) => Math.round(yVal * 100) + '%',
   }}
   axisLabels={axisLabels}
-  takeFirst={1000}
+  takeFirst={takeFirst}
   datasets={{
     aozora: {
       data: aozoraCharacters,
-      color: 'rgb(3 105 161)', // text-sky-700
+      color: AOZORA_COLOR,
     },
     wikipedia: {
       data: wikipediaCharacters,
-      color: 'rgb(185 28 28)', // text-red-700
+      color: WIKIPEDIA_COLOR,
     },
     news: {
       data: newsCharacters,
-      color: 'rgb(21 128 61)', // text-green-700
+      color: NEWS_COLOR,
     },
   }}
 />

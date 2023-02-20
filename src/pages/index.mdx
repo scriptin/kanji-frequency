@@ -49,13 +49,32 @@ which includes not only overall character frequency data,
 but also documents count, i.e. "in how many documents
 in this corpus this particular kanji appears?"
 
-## Coverage of corpora
+## Comparison of corpora
 
-### Character coverage
+### Kanji frequency
 
 import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro';
 
 <CharCoverageChartI18n
+  class="mb-4"
+  axisLabels={{
+    x: 'Nth most frequent character',
+    y: 'Frequency, % of all kanji',
+  }}
+/>
+
+This diagram shows how often each Nth kanji characters appears in each corpus.
+Only kanji are counted, so "1%" should be interpreted as "1% of all kanji"
+(i.e. "every 100th kanji"), not as "1% of all the characters,
+including kana, punctuation, etc."
+
+Related: [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)
+
+### Cumulative coverage
+
+import CharCoverageCumulativeChartI18n from '@components/chart/CharCoverageCumulativeChartI18n.astro';
+
+<CharCoverageCumulativeChartI18n
   class="mb-4"
   axisLabels={{
     x: 'First N most frequent characters',
@@ -63,16 +82,16 @@ import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro
   }}
 />
 
-This diagram shows how many of the first most frequent kanji one needs
-to know in order to be able to recognize a given fraction of kanji characters
+This diagram shows a
+[cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function).
+It shows how many of the first most frequent kanji a person needs to know
+in order to be able to recognize a given fraction of all kanji characters
 in each corpus.
 
 For example, if a person knows the first 100 most frequent kanji from
 the "news" dataset (green line), they are able to recognize ~45% of kanji
-in news articles. Knowing 300 most frequenct kanji will ensure ~72% of
-recognition. Knowing 1000 results in ~96% recognition.
-
-See [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)
+in news articles. Knowing 300 most frequent kanji will ensure ~72% of
+recognition. Knowing top 1000 ensures ~96% recognition.
 
 ### Document coverage
 

@@ -6,7 +6,7 @@ interface DataRow {
   char_count: number;
 }
 
-export interface Props extends ChartBaseProps {
+export interface Props extends Omit<ChartBaseProps, 'ranges'> {
   takeFirst: number;
   datasets: {
     [key: string]: {
@@ -24,14 +24,16 @@ const {
   width,
   height,
   margin,
-  ranges,
   ...props
 } = Astro.props;
 
 function coverage(data: DataRow[], takeFirst: number): number[] {
   const total = +data[0].char_count;
+
+  let accumulator = 0;
   return data.slice(1, 1 + takeFirst).map(({ char_count }) => {
-    return char_count / total;
+    accumulator += +char_count;
+    return accumulator / total;
   });
 }
 
@@ -40,7 +42,6 @@ function coverageLine(
   width: number,
   height: number,
   margin: number,
-  rangeY: [number, number],
 ): string {
   const fromX = margin;
   const toX = width - margin;
@@ -49,13 +50,13 @@ function coverageLine(
 
   const fromY = margin;
   const toY = height - margin;
-  const rangeYpx = Math.abs(toY - fromY);
+  const rangeY = Math.abs(toY - fromY);
 
   return coverage
     .map((cov, index) => {
       const op = index === 0 ? 'M' : 'L';
       const x = fromX + (index + 1) * stepX;
-      const y = toY - (rangeYpx / (rangeY[1] - rangeY[0])) * cov;
+      const y = toY - rangeY * cov;
       return `${op} ${x} ${y}`;
     })
     .join(' ');
@@ -69,7 +70,10 @@ const datasetKeyLegens = Object.keys(datasets).reverse();
   width={width}
   height={height}
   margin={margin}
-  ranges={ranges}
+  ranges={{
+    x: [0, takeFirst],
+    y: [0, 1],
+  }}
   {...props}
 >
   <Fragment slot="chart">
@@ -81,7 +85,6 @@ const datasetKeyLegens = Object.keys(datasets).reverse();
             width,
             height,
             margin,
-            ranges.y,
           )}
           stroke={datasets[datasetKey].color}
           stroke-width={1.5}

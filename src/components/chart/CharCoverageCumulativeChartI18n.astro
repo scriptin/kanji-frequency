@@ -1,57 +1,55 @@
 ---
 /**
- * @description A thin wrapper around {@link CharCoverageChart}
+ * @description A thin wrapper around {@link CharCoverageCumulativeChart}
  * which exposes only text labels for i18n purposes.
  */
 
-import DocCoverageChart, {
+import CharCoverageCumulativeChart, {
   Props as ChartProps,
-} from './DocCoverageChart.astro';
+} from './CharCoverageCumulativeChart.astro';
 
 import { AOZORA_COLOR, WIKIPEDIA_COLOR, NEWS_COLOR } from './colors';
 
-import aozoraDocuments from '@data/aozora_documents.csv';
-import wikipediaDocuments from '@data/wikipedia_documents.csv';
-import newsDocuments from '@data/news_documents.csv';
+import aozoraCharacters from '@data/aozora_characters.csv';
+import wikipediaCharacters from '@data/wikipedia_characters.csv';
+import newsCharacters from '@data/news_characters.csv';
 
 export interface Props extends Pick<ChartProps, 'axisLabels' | 'class'> {}
 
 const { axisLabels, class: className } = Astro.props;
-
-const takeFirst = 100;
 ---
 
-<DocCoverageChart
+<CharCoverageCumulativeChart
   class={className}
   width={400}
   height={250}
   margin={30}
   gridLines={{
-    everyX: 5,
+    everyX: 100,
     everyY: 0.1,
     dashArray: '3,2',
   }}
   ticks={{
     size: 3,
-    everyX: 5,
+    everyX: 100,
     everyY: 0.1,
     needsLabelAtX: (idx) => idx % 2 === 0,
     needsLabelAtY: (idx) => idx % 2 === 0,
     labelY: (yVal: number) => Math.round(yVal * 100) + '%',
   }}
   axisLabels={axisLabels}
-  takeFirst={takeFirst}
+  takeFirst={1000}
   datasets={{
     aozora: {
-      data: aozoraDocuments,
+      data: aozoraCharacters,
       color: AOZORA_COLOR,
     },
     wikipedia: {
-      data: wikipediaDocuments,
+      data: wikipediaCharacters,
       color: WIKIPEDIA_COLOR,
     },
     news: {
-      data: newsDocuments,
+      data: newsCharacters,
       color: NEWS_COLOR,
     },
   }}
