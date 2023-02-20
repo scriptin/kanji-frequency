@@ -39,15 +39,17 @@ import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro
 <CharCoverageChartI18n
   class="mb-4"
   axisLabels={{
-    x: 'Nth most frequent character',
+    x: 'Kanji rank',
     y: 'Frequency, % of all kanji',
   }}
 />
 
-This diagram shows how often each Nth kanji characters appears in each corpus.
-Only kanji are counted, so "1%" should be interpreted as "1% of all kanji"
-(i.e. "every 100th kanji"), not as "1% of all the characters,
-including kana, punctuation, etc."
+This diagram shows how often a kanji of rank _N_ appears in each corpus.
+Only kanji are counted, so "1%" should be interpreted as "1% of all kanji in a corpus,"
+not as "1% of all the characters, including kana, punctuation, etc."
+
+Keep in mind that ranks of kanji don't match across corpora,
+e.g. "人" is the 1st in Aozora, but 7th in Wikipedia.
 
 Related: [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law)
 
@@ -58,16 +60,16 @@ import CharCoverageCumulativeChartI18n from '@components/chart/CharCoverageCumul
 <CharCoverageCumulativeChartI18n
   class="mb-4"
   axisLabels={{
-    x: 'First N most frequent characters',
+    x: 'First N most frequent kanji',
     y: 'Coverage of corpus, % of all kanji',
   }}
 />
 
 This diagram shows a
 [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function).
-It shows how many of the first most frequent kanji a person needs to know
-in order to be able to recognize a given fraction of all kanji characters
-in each corpus.
+It shows how many of the first _N_ most frequent kanji (top _N_ kanji)
+a person needs to know in order to be able to recognize a given fraction
+of all kanji characters in each corpus.
 
 For example, if a person knows the first 100 most frequent kanji from
 the "news" dataset (green line), they are able to recognize ~45% of kanji
@@ -81,14 +83,14 @@ import DocCoverageChartI18n from '@components/chart/DocCoverageChartI18n.astro';
 <DocCoverageChartI18n
   class="mb-4"
   axisLabels={{
-    x: 'Nth most frequent character',
+    x: 'Kanji rank',
     y: 'Coverage of corpus, % of all docs/texts',
   }}
 />
 
 This diagram shows how many of the documents/texts in each dataset contain
-every Nth most frequent character. Character frequency in this case is defined
-as the number of documents/texts which contain this character.
+a kanji character of rank _N_. Character rank/frequency in this case is defined
+by the number of documents/texts which contain this character.
 
 For example, the 1st most popular kanji in the "news" dataset (green line)
 is present in almost 100% of all documents, while the 100th most popular
