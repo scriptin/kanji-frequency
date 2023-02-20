@@ -73,7 +73,8 @@ export function range(start: number, end: number, step: number): number[] {
         const fromX = margin;
         const toX = width - margin;
         const rangeX = Math.abs(toX - fromX);
-        const x = fromX + rangeX * (xVal / (ranges.x[1] - ranges.x[0]));
+        const x =
+          fromX + rangeX * ((xVal - ranges.x[0]) / (ranges.x[1] - ranges.x[0]));
         const gridLinePath = `M ${x} ${height - margin} L ${x} ${margin}`;
         return (
           <path
@@ -93,7 +94,8 @@ export function range(start: number, end: number, step: number): number[] {
         const fromX = margin;
         const toX = width - margin;
         const rangeX = Math.abs(toX - fromX);
-        const x = fromX + rangeX * (xVal / (ranges.x[1] - ranges.x[0]));
+        const x =
+          fromX + rangeX * ((xVal - ranges.x[0]) / (ranges.x[1] - ranges.x[0]));
         const tickPath = `M ${x} ${height - margin} L ${x} ${
           height - margin + ticks.size
         }`;
@@ -128,7 +130,8 @@ export function range(start: number, end: number, step: number): number[] {
         const fromY = height - margin;
         const toY = margin;
         const rangeY = Math.abs(toY - fromY);
-        const y = fromY - rangeY * (yVal / (ranges.y[1] - ranges.y[0]));
+        const y =
+          fromY - rangeY * ((yVal - ranges.y[0]) / (ranges.y[1] - ranges.y[0]));
         const gridLinePath = `M ${margin} ${y} L ${width - margin} ${y}`;
         return (
           <path
@@ -148,7 +151,8 @@ export function range(start: number, end: number, step: number): number[] {
         const fromY = height - margin;
         const toY = margin;
         const rangeY = Math.abs(toY - fromY);
-        const y = fromY - rangeY * (yVal / (ranges.y[1] - ranges.y[0]));
+        const y =
+          fromY - rangeY * ((yVal - ranges.y[0]) / (ranges.y[1] - ranges.y[0]));
         const tickPath = `M ${margin} ${y} L ${margin - ticks.size} ${y}`;
         const label = ticks.labelY?.(yVal) ?? yVal;
         return (
