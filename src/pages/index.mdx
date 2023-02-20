@@ -11,6 +11,7 @@ subtitle: Datasets built from various Japanese language corpora
   - [Kanji frequency](#kanji-frequency)
   - [Cumulative coverage](#cumulative-coverage)
   - [Document coverage](#document-coverage)
+- [Time distribution](#time-distribution)
 - [History](#history)
   - [Old version](#old-version)
   - [Current version](#current-version)
@@ -92,6 +93,40 @@ as the number of documents/texts which contain this character.
 For example, the 1st most popular kanji in the "news" dataset (green line)
 is present in almost 100% of all documents, while the 100th most popular
 appreas in ~26% of documents.
+
+## Time distribution
+
+The style of text, grammar, vocabulary, and usage of certain kanji
+may depend on when a particular text was written. Also, texts which
+discuss events of a certain time period may have statistical biases,
+e.g. newspapers from 2020-2022 use COVID- and medicine-related
+words and kanji more often compared to previous years.
+
+That's why it's important to collect texts which are distributed
+across wider time periods to avoid biases and have representative
+datasets.
+
+- **Aozora**: most texts are in public domain due to
+  expiration of copyright terms, which is currently
+  [70 years in Japan](https://en.wikipedia.org/wiki/Copyright_law_of_Japan).
+  This means that the majority of texts are more than 70 years old,
+  and many of the texts are classic literary works, so they are even older.
+  However, some of the works may have been adapted
+  to the modern Japanese grammar and kanji usage standards
+- **Wikipedia**: All articles are written in modern Japanese.
+  The data was collected in January of 2023 and was randomly
+  sampled from articles published at that time
+- **News**: See the diagram below
+
+import DateChartI18n from '@components/chart/DateChartI18n.astro';
+
+<DateChartI18n
+  class="mb-4"
+  axisLabels={{
+    x: 'Year',
+    y: 'Number of articles',
+  }}
+/>
 
 ## History
 

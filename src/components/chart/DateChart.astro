@@ -1,0 +1,107 @@
+---
+import ChartBase from './ChartBase.astro';
+import type { Props as ChartBaseProps } from './ChartBase.astro';
+import { Accessibility } from 'puppeteer';
+
+interface DataRow {
+  year: string;
+  month: string;
+  wikinews: string;
+}
+
+export interface Props extends ChartBaseProps {
+  data: DataRow[];
+  color: string;
+  barWidth: number; // px
+}
+
+const {
+  // own
+  data,
+  color,
+  barWidth,
+  // inherited
+  width,
+  height,
+  margin,
+  ranges,
+  ...props
+} = Astro.props;
+
+interface ByYearDataRow {
+  year: number;
+  count: number;
+}
+
+const dataByYear: ByYearDataRow[] = data.reduce(
+  (acc, { year, wikinews }: DataRow) => {
+    if (acc.length === 0) {
+      acc.push({ year: +year, count: +wikinews });
+    } else if (acc[acc.length - 1].year !== +year) {
+      acc.push({ year: +year, count: +wikinews });
+    } else {
+      acc[acc.length - 1].count += +wikinews;
+    }
+    return acc;
+  },
+  [] as ByYearDataRow[],
+);
+
+function barPath(
+  year: number,
+  count: number,
+  width: number,
+  height: number,
+  margin: number,
+  rangeX: [number, number],
+  rangeY: [number, number],
+): string {
+  const index = year - rangeX[0];
+  const relativeValue = count / (rangeY[1] - rangeY[0]);
+
+  const fromX = margin;
+  const toX = width - margin;
+  const rangeXpx = Math.abs(toX - fromX);
+  const stepXpx = rangeXpx / (rangeX[1] - rangeX[0]);
+  const x = fromX + stepXpx * index;
+
+  const fromY = height - margin;
+  const toY = margin;
+  const rangeYpx = Math.abs(toY - fromY);
+
+  const start = [x, fromY];
+  const end = [x, fromY - rangeYpx * relativeValue];
+
+  return `M ${start.join(' ')} L ${end.join(' ')}`;
+}
+---
+
+<ChartBase
+  width={width}
+  height={height}
+  margin={margin}
+  ranges={ranges}
+  {...props}
+>
+  <Fragment slot="chart">
+    {
+      dataByYear.map(({ year, count }) => (
+        <path
+          d={barPath(year, count, width, height, margin, ranges.x, ranges.y)}
+          stroke={color}
+          stroke-width={barWidth}
+          stroke-linecap="butt"
+          stroke-linejoin="round"
+          stroke-opacity={1}
+          fill="none"
+        />
+      ))
+    }
+  </Fragment>
+  <Fragment slot="legend">
+    <div class="flex gap-1">
+      <div class="font-bold" style={{ color }}>&#9632;</div>
+      <div>wikinews</div>
+    </div>
+  </Fragment>
+</ChartBase>

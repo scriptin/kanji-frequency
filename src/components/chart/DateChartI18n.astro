@@ -1,0 +1,39 @@
+---
+import DateChart from './DateChart.astro';
+import type { Props as DateChartProps } from './DateChart.astro';
+
+import newsDates from '@data/news_dates.csv';
+import { NEWS_COLOR } from './colors';
+
+export interface Props extends Pick<DateChartProps, 'axisLabels' | 'class'> {}
+
+const { axisLabels, class: className } = Astro.props;
+---
+
+<DateChart
+  axisLabels={axisLabels}
+  class={className}
+  data={newsDates}
+  color={NEWS_COLOR}
+  barWidth={9}
+  width={400}
+  height={250}
+  margin={30}
+  ranges={{
+    x: [2004, 2023],
+    y: [0, 1000],
+  }}
+  gridLines={{
+    everyX: 9999, // don't show
+    everyY: 100,
+    dashArray: '3,2',
+  }}
+  ticks={{
+    size: 3,
+    everyX: 1,
+    everyY: 50,
+    needsLabelAtX: (idx) => idx > 0,
+    labelX: (v) => `'${(v - 2000).toString().padStart(2, '0')}`,
+    needsLabelAtY: (idx) => idx % 2 === 0,
+  }}
+/>
