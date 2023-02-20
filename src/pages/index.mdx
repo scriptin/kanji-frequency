@@ -4,50 +4,29 @@ title: Kanji usage frequency
 subtitle: Datasets built from various Japanese language corpora
 ---
 
-## About
+## Contents
+
+- [About this project](#about-this-project)
+- [Comparison of corpora](#comparison-of-corpora)
+  - [Kanji frequency](#kanji-frequency)
+  - [Cumulative coverage](#cumulative-coverage)
+  - [Document coverage](#document-coverage)
+- [History](#history)
+  - [Old version](#old-version)
+  - [Current version](#current-version)
+- [Want to contribute?](#want-to-contribute)
+
+## About this project
 
 This project is an attempt to collect a big set of comparable data
 about Japanese kanji (漢字) usage frequency from various sources.
+The sources are picked to represent different styles of texts:
+journalistic, academic, literary, etc.
 
-### History
-
-In 2014-2015, I started this project to answer the following question:
+The initial goal of creating this dataset was to answer the following question:
 
 > "In which order should I learn Japanese kanji if I have a goal
-> of reading some specific type of texts, e.g. news?"
-
-The data was collected from the following sources:
-
-- [Aozora Bunko](https://www.aozora.gr.jp/)
-- [Japanese Wikipedia](https://ja.wikipedia.org/)
-- Several popular Japanese news websites:
-  [Asahi](https://www.asahi.com/),
-  [Mainichi](https://mainichi.jp/), etc.
-- Twitter
-
-However, this first attempt lacked sufficient research and technical effort,
-and the resulting datasets have multiple issues, described in the
-[attached readme](https://github.com/scriptin/kanji-frequency/tree/master/data2015/README.md).
-
-### Current version
-
-This new version solves the most of the aforementioned issues,
-but unfortunately has some new problems:
-
-- **Twitter dataset was exluded**:
-  - Twitter API no longer has a free teer,
-  - Changes in the organization management and staff layoffs
-    resulted in insufficient content moderation,
-- **News dataset is much smaller**:
-  - Most news on popular websites are now behind a paywall,
-    making it impractical to create a crawler/scraper,
-  - [Japanese Wikinews](https://ja.wikinews.org/) has way
-    less articles than a typical big news website.
-
-Despite these problems, this new dataset has a better format,
-which includes not only overall character frequency data,
-but also documents count, i.e. "in how many documents
-in this corpus this particular kanji appears?"
+> of reading some specific type of texts, e.g. news or fiction?"
 
 ## Comparison of corpora
 
@@ -113,7 +92,61 @@ For example, the 1st most popular kanji in the "news" dataset (green line)
 is present in almost 100% of all documents, while the 100th most popular
 appreas in ~26% of documents.
 
+## History
+
+### Old version
+
+The data in the old version was collected from the following sources:
+
+- [Aozora Bunko](https://www.aozora.gr.jp/)
+- [Japanese Wikipedia](https://ja.wikipedia.org/)
+- Several popular Japanese news websites:
+  [Asahi](https://www.asahi.com/),
+  [Mainichi](https://mainichi.jp/), etc.
+- Twitter
+
+However, this first attempt lacked sufficient research and technical effort,
+and the resulting dataset had multiple issues, described in the
+[attached readme](https://github.com/scriptin/kanji-frequency/tree/master/data2015/README.md).
+
+### Current version
+
+This new version solves the most of the aforementioned issues,
+but unfortunately has some new problems:
+
+- **Twitter dataset was exluded**:
+  - Twitter API no longer has a free teer
+  - Changes in the organization management and staff layoffs at Twitter
+    resulted in insufficient content moderation, which has a potential
+    of bias. I wanted to avoid including any hate speech in the data
+- **News dataset is much smaller**:
+  - Most news on popular websites are now behind paywalls,
+    making it impractical to create crawlers/scrapers
+  - Most news websites don't publish their archives online,
+    so collecting enough historical data is impossible.
+    I am still considering creating a long-running data scraper which
+    would collect data through RSS over a course of several months
+  - [Japanese Wikinews](https://ja.wikinews.org/) has way
+    less articles than a typical big news website, but it's the largest
+    news dataset available online for free
+
+Despite these problems, this new dataset has a better format,
+which includes not only overall character frequency data,
+but also documents count, i.e. "in how many documents
+in this corpus this particular kanji appears?"
+
 ## Want to contribute?
 
-Start by looking through the [list of issues](https://github.com/scriptin/kanji-frequency/issues),
-and open a new issue if you found a problem or want to otherwise improve this dataset.
+Start by looking through the
+[list of issues](https://github.com/scriptin/kanji-frequency/issues),
+and open a new issue if you found a problem or want to otherwise
+improve this dataset:
+
+- **Typos / corrections**: See the
+  [source code for pages](https://github.com/scriptin/kanji-frequency/tree/master/src/pages)
+- **More data sources**: I am looking forward to add more data sources.
+  If you have access to a sufficiently big dataset, or know about some data
+  available online, please let me know by opening an issue
+- **Translations / i18n**: I would like to translate this website
+  into multiple languages, so if you're willing to participate
+  as a translator, please let me know as well
