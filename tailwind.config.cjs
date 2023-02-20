@@ -70,7 +70,6 @@ module.exports = {
             },
           },
           blockquote: {
-            fontStyle: 'italic',
             borderLeft: `${theme('borderWidth.4')} solid ${theme(
               'borderColor.sky.200',
             )}`,
