@@ -5,6 +5,11 @@ import type {
   DocumentsTableRow,
 } from 'src/datasets';
 
+import Table from './Table.astro';
+import TableCell from './TableCell.astro';
+import TableHeaderCell from './TableHeaderCell.astro';
+import TableSecondaryHeaderCell from './TableSecondaryHeaderCell.astro';
+
 export interface CharProps {
   type: 'characters';
   data: CharactersTableRow[];
@@ -39,47 +44,40 @@ const { nRows, data, columns, class: className } = Astro.props;
 const rows = data.slice(0, nRows);
 ---
 
-<table
-  class:list={[
-    className,
-    'text-sm text-sky-100 bg-gradient-to-br from-sky-700 to-sky-800 rounded-lg',
-  ]}
->
-  <thead>
+<Table class={className}>
+  <thead slot="head">
     <tr>
       {
         columns.map((c) => (
-          <td class="font-bold px-3 py-1 border-b border-b-sky-600">
-            {c.name}
-          </td>
+          <TableHeaderCell borderBottom>{c.name}</TableHeaderCell>
         ))
       }
     </tr>
     <tr>
       {
         columns.map((c) => (
-          <td class="text-xs text-sky-300 align-text-top uppercase px-3 py-1">
+          <TableSecondaryHeaderCell class="text-xs uppercase">
             {c.type}
-          </td>
+          </TableSecondaryHeaderCell>
         ))
       }
     </tr>
     <tr>
       {
         columns.map((c) => (
-          <td class="text-xs text-sky-300 align-text-top px-3 py-1 border-b border-b-sky-600">
+          <TableSecondaryHeaderCell borderBottom>
             {c.comment ?? ' '}
-          </td>
+          </TableSecondaryHeaderCell>
         ))
       }
     </tr>
   </thead>
-  <tbody>
+  <tbody slot="body">
     {
       rows.map((row) => (
         <tr>
           {columns.map((c) => (
-            <td class="px-3 py-1">
+            <TableCell>
               {
                 row[
                   c.name as keyof (
@@ -89,10 +87,10 @@ const rows = data.slice(0, nRows);
                   )
                 ]
               }
-            </td>
+            </TableCell>
           ))}
         </tr>
       ))
     }
   </tbody>
-</table>
+</Table>

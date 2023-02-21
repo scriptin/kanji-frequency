@@ -1,0 +1,19 @@
+---
+export interface Props {
+  children: any;
+  borderRight?: boolean;
+  class?: string;
+}
+
+const { borderRight = false, class: className } = Astro.props;
+---
+
+<td
+  class:list={[
+    'px-3 py-1',
+    borderRight ? 'border-r border-r-sky-600' : '',
+    className,
+  ]}
+>
+  <slot />
+</td>

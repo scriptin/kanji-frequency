@@ -1,0 +1,92 @@
+---
+import { datasets } from 'src/datasets';
+import type {
+  DatasetKey,
+  CharactersTableRow,
+  DocumentsTableRow,
+} from 'src/datasets';
+
+import Table from './Table.astro';
+import TableCell from './TableCell.astro';
+import TableHeaderCell from './TableHeaderCell.astro';
+import TableSecondaryHeaderCell from './TableSecondaryHeaderCell.astro';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const datasetKeys = Object.keys(datasets) as DatasetKey[];
+datasetKeys.sort(); // alphabetically
+
+const topN = 10;
+
+function topKanji(ds: (CharactersTableRow | DocumentsTableRow)[]): string[] {
+  return ds.slice(1, 1 + topN).map(({ char }) => char);
+}
+
+const data: Record<string, { characters: string[]; documents: string[] }> = {};
+for (let ds of datasetKeys) {
+  data[ds] = {
+    characters: topKanji(datasets[ds].characters),
+    documents: topKanji(datasets[ds].documents),
+  };
+}
+
+const rows: string[][] = [];
+for (let i = 0; i < topN; i++) {
+  rows[i] = [(i + 1).toString()];
+  for (let ds of datasetKeys) {
+    rows[i].push(data[ds]!.characters[i]);
+  }
+  for (let ds of datasetKeys) {
+    rows[i].push(data[ds]!.documents[i]);
+  }
+}
+---
+
+<Table class={className}>
+  <thead slot="head">
+    <tr>
+      <TableSecondaryHeaderCell borderRight>Top...</TableSecondaryHeaderCell>
+      <TableSecondaryHeaderCell borderRight colSpan={datasetKeys.length}>
+        ...by characters count
+      </TableSecondaryHeaderCell>
+      <TableSecondaryHeaderCell colSpan={datasetKeys.length}>
+        ...by documents count
+      </TableSecondaryHeaderCell>
+    </tr>
+    <tr>
+      <TableHeaderCell borderBottom borderRight>Rank</TableHeaderCell>
+      {
+        datasetKeys.map((dsName, idx) => (
+          <TableHeaderCell
+            borderBottom
+            borderRight={idx === datasetKeys.length - 1}
+          >
+            {dsName}
+          </TableHeaderCell>
+        ))
+      }
+      {
+        datasetKeys.map((dsName) => (
+          <TableHeaderCell borderBottom>{dsName}</TableHeaderCell>
+        ))
+      }
+    </tr>
+  </thead>
+  <tbody slot="body">
+    {
+      rows.map((row) => (
+        <tr>
+          {row.map((cell, idx) => (
+            <TableCell borderRight={idx === 0 || idx === datasetKeys.length}>
+              {cell}
+            </TableCell>
+          ))}
+        </tr>
+      ))
+    }
+  </tbody>
+</Table>

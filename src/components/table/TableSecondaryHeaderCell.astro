@@ -1,0 +1,12 @@
+---
+import TableHeaderCell from './TableHeaderCell.astro';
+import type { Props as TableHeaderCellProps } from './TableHeaderCell.astro';
+
+export interface Props extends TableHeaderCellProps {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<TableHeaderCell class={'font-normal text-sky-300 ' + className} {...props}>
+  <slot />
+</TableHeaderCell>

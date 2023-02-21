@@ -1,0 +1,17 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<table
+  class:list={[
+    className,
+    'text-sm text-sky-100 bg-gradient-to-br from-sky-700 to-sky-800 rounded-lg',
+  ]}
+>
+  <slot name="head" />
+  <slot name="body" />
+</table>

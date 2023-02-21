@@ -1,0 +1,28 @@
+---
+export interface Props {
+  children: any;
+  borderBottom?: boolean;
+  borderRight?: boolean;
+  class?: string;
+  colSpan?: number;
+}
+
+const {
+  borderBottom = false,
+  borderRight = false,
+  class: className,
+  colSpan = 1,
+} = Astro.props;
+---
+
+<th
+  class:list={[
+    'font-bold align-text-top text-left px-3 py-1',
+    borderBottom ? 'border-b border-b-sky-600' : '',
+    borderRight ? 'border-r border-r-sky-600' : '',
+    className,
+  ]}
+  colspan={colSpan}
+>
+  <slot />
+</th>

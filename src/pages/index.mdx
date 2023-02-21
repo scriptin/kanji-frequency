@@ -32,6 +32,15 @@ The initial goal of creating this dataset was to answer the following question:
 
 ## Comparison of corpora
 
+Kanji frequency is significantly different across corpora.
+Table below demonstates a few of the top most frequent kanji
+by 2 metrics: (1) total kanji count, (2) documents count, i.e. how many
+documents in a corpus contain given kanji.
+
+import DatasetComparisonTable from '@components/table/DatasetComparisonTable.astro';
+
+<DatasetComparisonTable class="mb-4" />
+
 ### Kanji frequency
 
 import CharCoverageChartI18n from '@components/chart/CharCoverageChartI18n.astro';

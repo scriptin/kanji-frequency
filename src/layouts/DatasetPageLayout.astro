@@ -7,7 +7,7 @@ import PageTitle from '@components/PageTitle.astro';
 import PageSubtitle from '@components/PageSubtitle.astro';
 import Heading from '@components/Heading.astro';
 import DownloadLink, { DOWNLOAD_URL } from '@components/DownloadLink.astro';
-import Table from '@components/Table.astro';
+import DatasetSampleTable from '@components/table/DatasetSampleTable.astro';
 import Navigation from '@components/Navigation.astro';
 
 import { datasets } from 'src/datasets';
@@ -67,7 +67,7 @@ const tableClass = 'mt-2 mb-4';
               {datasetKey}_characters.csv
             </a>
           </Heading>
-          <Table
+          <DatasetSampleTable
             type="characters"
             data={dataset.characters}
             nRows={SAMPLE_ROWS}
@@ -100,7 +100,7 @@ const tableClass = 'mt-2 mb-4';
               {datasetKey}_documents.csv
             </a>
           </Heading>
-          <Table
+          <DatasetSampleTable
             type="documents"
             data={dataset.documents}
             nRows={SAMPLE_ROWS}
@@ -136,7 +136,7 @@ const tableClass = 'mt-2 mb-4';
               {datasetKey}_dates.csv
             </a>
           </Heading>
-          <Table
+          <DatasetSampleTable
             type="dates"
             data={dataset.dates}
             nRows={SAMPLE_ROWS}
