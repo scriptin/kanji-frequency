@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/container-queries'),
+    require('@tailwindcss/forms'),
     function ({ addBase, theme }) {
       addBase({
         html: {

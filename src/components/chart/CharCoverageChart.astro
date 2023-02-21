@@ -1,6 +1,8 @@
 ---
 import ChartBase from './ChartBase.astro';
 import type { Props as ChartBaseProps } from './ChartBase.astro';
+import Label from './Label.astro';
+import { id } from 'src/id';
 
 interface DataRow {
   char_count: number;
@@ -63,6 +65,8 @@ function coverageLine(
 
 // Reversed because the lines appear in this order, top to bottom
 const datasetKeyLegens = Object.keys(datasets).reverse();
+
+const baseId = id();
 ---
 
 <ChartBase
@@ -76,6 +80,7 @@ const datasetKeyLegens = Object.keys(datasets).reverse();
     {
       Object.keys(datasets).map((datasetKey) => (
         <path
+          id={`${baseId}-${datasetKey}`}
           d={coverageLine(
             coverage(datasets[datasetKey].data, takeFirst),
             width,
@@ -96,13 +101,33 @@ const datasetKeyLegens = Object.keys(datasets).reverse();
   <Fragment slot="legend">
     {
       datasetKeyLegens.map((datasetKey) => (
-        <div class="flex gap-1">
-          <div class="font-bold" style={{ color: datasets[datasetKey].color }}>
+        <Label>
+          <input
+            type="checkbox"
+            checked
+            class="rounded"
+            id={`${baseId}-${datasetKey}-checkbox`}
+            onchange={`coverage_toggle("${baseId}-${datasetKey}")`}
+          />
+          <span class="font-bold" style={{ color: datasets[datasetKey].color }}>
             &mdash;
-          </div>
-          <div>{datasetKey}</div>
-        </div>
+          </span>
+          <span>{datasetKey}</span>
+        </Label>
       ))
     }
   </Fragment>
 </ChartBase>
+
+<script is:inline>
+  function coverage_toggle(id) {
+    const checkboxId = `${id}-checkbox`;
+    const checkbox = document.getElementById(checkboxId);
+    const line = document.getElementById(id);
+    if (checkbox.checked) {
+      line.setAttribute('opacity', 1);
+    } else {
+      line.setAttribute('opacity', 0);
+    }
+  }
+</script>
