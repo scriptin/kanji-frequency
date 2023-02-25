@@ -1,54 +1,36 @@
-# Astro Starter Kit: Basics
+# Kanji usage frequency
 
-```
-npm create astro@latest -- --template basics
-```
+Datasets built from various Japanese language corpora
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+<https://scriptin.github.io/kanji-frequency/> - see this website for the dataset description. This readme describes only technical aspects.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+You can download the datasets here: <https://github.com/scriptin/kanji-frequency/tree/master/data>
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+## Building the datasets
 
+You'll need Node.js 18 or later.
 
-## 🚀 Project Structure
+See `scripts` section in [package.json](./package.json).
 
-Inside of your Astro project, you'll see the following folders and files:
+Aozora:
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- `aozora:download` - use crawler/scraper to collect the data
+- `aozora:gaiji:extract` - extract gaiji notations data from scraped pages. Gaiji refers to kanji charasters which are replaced with images in the documents, because Shift-JIS encoding cannot represent them
+- `aozora:gaiji:replacements` - build gaiji replacements file - produces only partial results, which may need to be manually completed
+- `aozora:clean` - clean the scraped pages (apply gaiji replacements)
+- `aozora:count` - create the dataset
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Wikipedia:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `wikipedia:fetch` - fetch random pages using MediaWiki API
+- `wikipedia:count` - create the dataset
 
-Any static assets, like images, can be placed in the `public/` directory.
+News:
 
-## 🧞 Commands
+- `news:wikinews:fetch` - fetch random pages from Wikinews using MediaWiki API
+- `news:count` - create the dataset
+- `news:dates` - create additional file with dates of articles
 
-All commands are run from the root of the project, from a terminal:
+## Building the website
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+See [Astro](https://astro.build/) [docs](https://docs.astro.build/en/getting-started/) and the `scripts` section in [package.json](./package.json).
