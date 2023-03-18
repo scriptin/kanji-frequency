@@ -6,7 +6,7 @@ const {
   isHanExt,
   IDEOGRAPHIC_ITERATION_MARK_CODE_POINT,
   isIterationMark,
-} = require('./han');
+} = require('@scriptin/is-han');
 const { toCsv } = require('./csv');
 const { ConsoleReporter } = require('./reporter');
 

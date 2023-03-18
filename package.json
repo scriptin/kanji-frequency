@@ -1,6 +1,5 @@
 {
   "name": "kanji-frequency",
-  "type": "module",
   "version": "0.0.0",
   "description": "Kanji usage frequency data and visualizations",
   "author": "Dmitry Shpika",
@@ -42,6 +41,7 @@
     "@astrojs/mdx": "^0.17.0",
     "@astrojs/tailwind": "^3.0.1",
     "@rollup/plugin-dsv": "^3.0.2",
+    "@scriptin/is-han": "^1.0.1",
     "@tailwindcss/container-queries": "^0.1.0",
     "@tailwindcss/forms": "^0.5.3",
     "astro": "^2.0.14",
