@@ -38,19 +38,20 @@
     "news:dates": "node scripts/news/dates.js"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.17.0",
-    "@astrojs/tailwind": "^3.0.1",
+    "@astrojs/mdx": "^1.0.0",
+    "@astrojs/tailwind": "^5.0.0",
     "@rollup/plugin-dsv": "^3.0.2",
     "@scriptin/is-han": "^1.0.1",
-    "@tailwindcss/container-queries": "^0.1.0",
-    "@tailwindcss/forms": "^0.5.3",
-    "astro": "^2.0.14",
-    "tailwindcss": "^3.2.6"
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.6",
+    "astro": "^3.0.7",
+    "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
     "@types/xml-flow": "^1.0.1",
     "prettier": "^2.8.2",
     "puppeteer": "^19.5.2",
+    "typescript": "^5.2.2",
     "xml-flow": "^1.0.4"
   }
 }
