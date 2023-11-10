@@ -33,9 +33,9 @@ The initial goal of creating this dataset was to answer the following question:
 ## Comparison of corpora
 
 Kanji frequency is significantly different across corpora.
-Table below demonstates a few of the top most frequent kanji
+Table below demonstrates a few of the top most frequent kanji
 by 2 metrics: (1) total kanji count, (2) documents count, i.e. how many
-documents in a corpus contain given kanji.
+documents in a corpus contain a given kanji.
 
 import DatasetComparisonTable from '@components/table/DatasetComparisonTable.astro';
 
@@ -103,7 +103,7 @@ by the number of documents/texts which contain this character.
 
 For example, the 1st most popular kanji in the "news" dataset (green line)
 is present in almost 100% of all documents, while the 100th most popular
-appreas in ~26% of documents.
+appears in ~26% of documents.
 
 ## Time distribution
 
@@ -125,7 +125,7 @@ datasets.
   However, some of the works may have been adapted
   to the modern Japanese grammar and kanji usage standards
 - **Wikipedia**: All articles are written in modern Japanese.
-  The data was collected in January of 2023 and was randomly
+  The data was collected in January 2023 and was randomly
   sampled from articles published at that time
 - **News**: See the diagram below
 
@@ -158,29 +158,29 @@ and the resulting dataset had multiple issues, described in the
 
 ### Current version
 
-This new version solves the most of the aforementioned issues,
+This new version solves most of the aforementioned issues,
 but unfortunately has some new problems:
 
-- **Twitter dataset was exluded**:
-  - Twitter API no longer has a free teer
+- **Twitter dataset was excluded**:
+  - Twitter API no longer has a free tier
   - Changes in the organization management and staff layoffs at Twitter
-    resulted in insufficient content moderation, which has a potential
-    of bias. I wanted to avoid including any hate speech in the data
+    resulted in insufficient content moderation.
+    I wanted to avoid including any hate speech in the data
 - **News dataset is much smaller**:
   - Most news on popular websites are now behind paywalls,
-    making it impractical to create crawlers/scrapers
+    making it impractical and illegal to create crawlers/scrapers
   - Most news websites don't publish their archives online,
     so collecting enough historical data is impossible.
     I am still considering creating a long-running data scraper which
     would collect data through RSS over a course of several months
-  - [Japanese Wikinews](https://ja.wikinews.org/) has way
-    less articles than a typical big news website, but it's the largest
-    news dataset available online for free
+  - [Japanese Wikinews](https://ja.wikinews.org/) has fewer
+    articles than a typical big news website, but it's the largest
+    open news dataset available
 
-Despite these problems, this new dataset has a better format,
+Despite these problems, the new dataset has a better format,
 which includes not only overall character frequency data,
-but also documents count, i.e. "in how many documents
-in this corpus this particular kanji appears?"
+but also documents count, i.e. "how many documents
+in this corpus contain this particular kanji?"
 
 ## Want to use the data?
 
@@ -208,7 +208,7 @@ which means:
 
 Start by looking through the
 [list of issues](https://github.com/scriptin/kanji-frequency/issues),
-and open a new issue if you found a problem or want to otherwise
+and open a new issue if you find a problem or want to otherwise
 improve this dataset:
 
 - **Typos / corrections**: See the
