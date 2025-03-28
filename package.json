@@ -50,7 +50,7 @@
   "devDependencies": {
     "@types/xml-flow": "^1.0.1",
     "prettier": "^2.8.2",
-    "puppeteer": "^22.13.0",
+    "puppeteer": "^22.15.0",
     "typescript": "^5.2.2",
     "xml-flow": "^1.0.4"
   }
